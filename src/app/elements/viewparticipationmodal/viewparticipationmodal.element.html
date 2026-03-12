@@ -1,0 +1,127 @@
+<div class="modal fade" id="viewparticipationmodal" tabindex="-1" role="dialog" aria-labelledby="viewparticipationmodal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header m-0">Participation
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-body">
+            <div class="card-header pb-0 text-left pt-0">
+              <div class="nav-wrapper position-relative end-0">
+                <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#groupparticipation" role="tab"
+                      aria-controls="groupparticipation" aria-selected="false">
+                      Participation
+                    </a>
+                  </li>
+                  <li *ngIf="this.objectId == 2" class="nav-item">
+                    <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#groupmembers" role="tab"
+                      aria-controls="groupmembers" aria-selected="true">
+                      Group Members
+                    </a>
+                  </li>
+                  <li *ngIf="this.objectId == 1" class="nav-item">
+                    <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#farmerDiary" role="tab"
+                      aria-controls="farmerDiary" aria-selected="true">
+                      Farmer Diary
+                    </a>
+                  </li>
+                  <div class="moving-tab position-absolute nav-link"
+                    style="padding: 0px; transition: all 0.5s ease 0s; transform: translate3d(291px, 0px, 0px); width: 299px;">
+                  </div>
+                </ul>
+              </div>
+            </div>
+            <form role="form text-left" class="tab-content">
+              <div *ngIf="this.objectId == 2" class="tab-pane fade" id="groupmembers" role="tabpanel"
+                aria-labelledby="groupmembers-tab">
+                <div class="row mt-3">
+                  <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                    <div class="form-check">
+                      <input class="form-check-input" name="selection" [(ngModel)]="selection" type="checkbox"
+                        id="selection" (change)="selectionchanged()">
+                      <label class="custom-control-label" for="selection">Member Selection</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="card card-plain">
+                  <div class="card-body">
+                    <div class="card-body mt-0">
+                      <div class="table-responsive">
+                        <div class="dataTable-wrapper " id="">
+                          <div class="dataTable-container ">
+                            <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                              id="dtGroupMembers">
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                    <button *ngIf="selection" type="button" class="btn btn-primary" (click)="add()">Add Members</button>
+                    <button *ngIf="!selection" type="button" class="btn btn-danger mx-2" (click)="remove()">Remove
+                      Members</button>
+                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade  show active" id="groupparticipation" role="tabpanel"
+                aria-labelledby="groupparticipation-tab">
+                <div class="card card-plain">
+                  <div class="card-body">
+                    <div class="card-body mt-0">
+                      <div class="table-responsive">
+                        <div class="dataTable-wrapper " id="">
+                          <div class="dataTable-container ">
+                            <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                              id="dtViewParticipation">
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="farmerDiary" role="tabpanel" aria-labelledby="farmerDiary-tab">
+                <div class="row mb-2">
+                  <div class="col-12 col-sm-6">
+                    <label for="groupType">Select Inputs/Sales</label>
+                    <select class="form-control" id="groupType" (change)="onSelect($event)">
+                      <option value="" selected disabled>Select</option>
+                      <option value="inputs">Inputs</option>
+                      <option value="sales">Sales</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="card card-plain">
+                  <div class="card-body">
+                    <div class="card-body mt-0">
+                      <div class="table-responsive">
+                        <div class="dataTable-wrapper " id="">
+                          <div class="dataTable-container ">
+                            <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                              id="dtfarmerDiary">
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

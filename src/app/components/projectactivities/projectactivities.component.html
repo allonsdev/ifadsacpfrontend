@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 col-12 mx-auto">
+            <div class="card card-body">
+                <h6 class="mb-0">Project Activities</h6>
+                <p class="text-sm mb-0">Add Project Activities</p>
+                <hr class="horizontal dark my-3">
+                <label for="projectName" class="form-label">Project Name</label>
+                <input type="text" class="form-control" id="projectName" value="Smallholder Agriculture Cluster Project"
+                    disabled>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="projectName" class="form-label"> Project Objective</label>
+                            <select class="form-control" name="Objective" [(ngModel)]="Objective"
+                                (change)="onObjectiveSelect($event)">
+                                <option value={{item.id}} *ngFor="let item of Objectives">{{item.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="projectName" class="form-label"> Project Outcome</label>
+                            <select class="form-control" name="Outcome" [(ngModel)]="Outcome"
+                                (change)="onOutcomeSelect($event)">
+                                <option value="5" selected disabled>--Select Outcome--</option>
+                                <option *ngFor="let item of filteredOutcomes" value={{item.id}}>{{item.name}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="projectName" class="form-label"> Project Output</label>
+                            <select class="form-control" name="Output" [(ngModel)]="Output" (change)="onselect($event)">
+                                <option value="5" selected disabled>--Select Output--</option>
+                                <option *ngFor="let item of filteredOutputs" value={{item.id}}>{{item.name}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="projectactivities" class="form-label"> Project Activity</label>
+                            <textarea type="text" class="form-control" id="projectactivities" name="Activity"
+                                [(ngModel)]="Activity"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="projectactivities" class="form-label"> Activity Name In Short</label>
+                            <input class="form-control" type="text" id="ActivityInShort" name="ActivityInShort"
+                                [(ngModel)]="ActivityInShort" />
+                            <!-- <span class="fs-6 text-danger" *ngIf="this.ActivityInShort.length > 128" >You have exceeded
+                                the number characters required for Activity In Short</span> -->
+
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="currentUser.permissions.includes('AlterLogframe')" class="text-start mx-1">
+                    <button type="button" class="btn bg-gradient-primary mb-3" (click)="save()">Save</button>
+                </div>
+                <div class="card-body mt-0">
+                    <div class="table-responsive">
+                        <div class="dataTable-wrapper " id="">
+                            <div class="dataTable-container ">
+                                <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                                    id="dtActivity">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer pt-3 ">
+        
+    </footer>
+</div>

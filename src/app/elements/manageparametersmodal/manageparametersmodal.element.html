@@ -1,0 +1,66 @@
+<div class="modal fade" id="manageparametersmodal" tabindex="-1" role="dialog" aria-labelledby="manageparametersmodal"
+  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header m-0">{{ListName !== undefined ? ListName:""}}
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-body">
+            <form [formGroup]="dynamicForm" role="form text-left" class="tab-content">
+              <div class="tab-pane fade show active" id="generalprojectdetails" role="tabpanel"
+                aria-labelledby="generalprojectdetails-tab">
+                <div class="row mt-3">
+                  <div *ngFor="let column of columns" class="col-12 col-sm-6">
+                    <label for="{{ column }}">{{ column }}</label>
+                    <input class="form-control" type="text" [formControlName]="column" id="{{ column }}"
+                      [attr.disabled]="column === parameter.PrimaryKey ? true : null">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12 col-md-12 d-flex justify-content-start">
+                    <button type="button" class="btn bg-gradient-primary" (click)="onSubmit()">Save</button>
+                    <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="container-fluid py-4">
+              <div class="row mt-4">
+                <div class="col-12 mt-4">
+                  <div class="card mb-4">
+                    <div class="card-body px-0 pt-0 pb-2">
+                      <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0" style="height: 200px; overflow-y: auto;">
+                          <thead>
+                            <tr>
+                              <th *ngFor="let column of columns">{{ column }}</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of filteredData">
+                              <td *ngFor="let column of columns">{{ item[column] }}</td>
+                              <td>
+                                <button class="btn btn-danger btn-sm" (click)="deleteItem(item[parameter.PrimaryKey])">
+                                  <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

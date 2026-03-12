@@ -1,0 +1,293 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header p-3">
+          <h5 class="mb-2">Dashboard</h5>
+          <h6 class="mb-0">Total Reach</h6>
+        </div>
+        <div class="card-body p-3">
+          <div class="row mb-4">
+            <div class="col-lg-4 col-6 text-center">
+              <a routerLink="/home/individualbeneficiaries">
+                <div
+                  class="border-dashed border-1 border-secondary border-radius-md py-3"
+                >
+                  <h6 class="text-success mb-1">Beneficiaries</h6>
+                  <div class="row w-100">
+                    <div class="col-6 d-flex flex-column border-end">
+                      <h4 class="font-weight-bolder text-muted">
+                        <span class="small">{{ beneficiaries }}</span>
+                      </h4>
+                      <h6 class="small text-muted">Current</h6>
+                    </div>
+                    <div class="col-6 d-flex flex-column">
+                      <h4 class="font-weight-bolder text-muted">
+                        <span class="small">{{ beneficiariesTarget }}</span>
+                      </h4>
+                      <h6 class="small text-muted">Target</h6>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-4 col-6 text-center">
+              <a routerLink="/home/groupedbeneficiaries">
+                <div
+                  class="border-dashed border-1 border-secondary border-radius-md py-3"
+                >
+                  <h6 class="text-success mb-1">APGs</h6>
+                  <div class="row w-100">
+                    <div class="col-6 d-flex flex-column border-end">
+                      <h4 class="font-weight-bolder text-muted">
+                        <span class="small">{{ groups }}</span>
+                      </h4>
+                      <h6 class="small text-muted">Current</h6>
+                    </div>
+                    <div class="col-6 d-flex flex-column">
+                      <h4 class="font-weight-bolder text-muted">
+                        <span class="small">{{ groupsTarget }}</span>
+                      </h4>
+                      <h6 class="small text-muted">Target</h6>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-4 col-6 text-center">
+              <a routerLink="/home/msmes">
+                <div
+                  class="border-dashed border-1 border-secondary border-radius-md py-3"
+                >
+                  <h6 class="text-success mb-1">MSEs</h6>
+                  <div class="row w-100">
+                    <div class="col-6 d-flex flex-column border-end">
+                      <h4 class="font-weight-bolder text-muted">
+                        <span class="small">{{ msmes }}</span>
+                      </h4>
+                      <h6 class="small text-muted">Current</h6>
+                    </div>
+                    <div class="col-6 d-flex flex-column">
+                      <h4 class="font-weight-bolder text-muted">
+                        <span class="small">{{ msmesTarget }}</span>
+                      </h4>
+                      <h6 class="small text-muted">Target</h6>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <hr class="horizontal dark" />
+          <div class="row mt-4">
+            <h6 class="mb-2">Total Reach(Beneficiaries)</h6>
+            <div>
+              <div class="row">
+                <div class="col-lg-4 col-6 text-center">
+                  <a routerLink="/home/individualbeneficiaries">
+                    <div
+                      class="border-dashed border-1 border-secondary border-radius-md py-3"
+                    >
+                      <h6 class="text-success mb-1">Men</h6>
+                      <div class="row w-100">
+                        <div class="col-6 d-flex flex-column border-end">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ men }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Current</h6>
+                        </div>
+                        <div class="col-6 d-flex flex-column">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ menTarget }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Target</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-6 text-center">
+                  <a routerLink="/home/individualbeneficiaries">
+                    <div
+                      class="border-dashed border-1 border-secondary border-radius-md py-3"
+                    >
+                      <h6 class="text-success mb-1">Women</h6>
+                      <div class="row w-100">
+                        <div class="col-6 d-flex flex-column border-end">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ women }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Current</h6>
+                        </div>
+                        <div class="col-6 d-flex flex-column">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ womenTarget }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Target</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-6 text-center">
+                  <a routerLink="/home/individualbeneficiaries">
+                    <div
+                      class="border-dashed border-1 border-secondary border-radius-md py-3"
+                    >
+                      <h6 class="text-success mb-1">Youth</h6>
+                      <div class="row w-100">
+                        <div class="col-6 d-flex flex-column border-end">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ youth }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Current</h6>
+                        </div>
+                        <div class="col-6 d-flex flex-column">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ youthTarget }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Target</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="horizontal dark" />
+          <div class="row mt-4">
+            <h6 class="mb-2"></h6>
+            <div>
+              <div class="row">
+                <div class="col-lg-4 col-6 text-center">
+                  <a routerLink="/home/individualbeneficiaries">
+                    <div
+                      class="border-dashed border-1 border-secondary border-radius-md py-3"
+                    >
+                      <h6 class="text-success mb-1">PLWD</h6>
+                      <div class="row w-100">
+                        <div class="col-6 d-flex flex-column border-end">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ plwd }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Current</h6>
+                        </div>
+                        <div class="col-6 d-flex flex-column">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ plwdTarget }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Target</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-6 text-center">
+                  <a routerLink="/home/individualbeneficiaries">
+                    <div
+                      class="border-dashed border-1 border-secondary border-radius-md py-3"
+                    >
+                      <h6 class="text-success mb-1">VCLE</h6>
+                      <div class="row w-100">
+                        <div class="col-6 d-flex flex-column border-end">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ vcle }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Current</h6>
+                        </div>
+                        <div class="col-6 d-flex flex-column">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ vcleTarget }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Target</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-6 text-center">
+                  <a routerLink="/home/individualbeneficiaries">
+                    <div
+                      class="border-dashed border-1 border-secondary border-radius-md py-3"
+                    >
+                      <h6 class="text-success mb-1">Women Headed Households</h6>
+                      <div class="row w-100">
+                        <div class="col-6 d-flex flex-column border-end">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ whhh }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Current</h6>
+                        </div>
+                        <div class="col-6 d-flex flex-column">
+                          <h4 class="font-weight-bolder text-muted">
+                            <span class="small">{{ whhhTarget }}</span>
+                          </h4>
+                          <h6 class="small text-muted">Target</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="horizontal dark" />
+          <div class="row mt-4">
+            <h6 class="mb-2">Charts</h6>
+            <div class="">
+              <div class="row mt-4">
+                <div class="col-md-12 mt-md-0 mt-4">
+                  <div class="card z-index-2">
+                    <div class="card-header p-3 pb-0">
+                      <h6>Beneficiary Reach By Province</h6>
+                    </div>
+                    <div class="card-body p-3">
+                      <div class="chart-container">
+                        <canvas id="reachbyprovince" height="100px">{{
+                          reachbyprovince
+                        }}</canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-md-12 mt-md-0 mt-4">
+                  <div class="card z-index-2">
+                    <div class="card-header p-3 pb-0">
+                      <h6>Beneficiary Reach By District</h6>
+                    </div>
+                    <div class="card-body p-3">
+                      <div class="chart-container">
+                        <canvas id="reachbydistrict" height="100px">{{
+                          reachbydistrict
+                        }}</canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-md-12 mt-md-0 mt-4">
+                  <div class="card z-index-2">
+                    <div class="card-header p-3 pb-0">
+                      <h6>Beneficiary Reach By Gender</h6>
+                    </div>
+                    <div class="card-body p-3">
+                      <div class="chart-container h-300">
+                        <canvas id="reachbyvc" height="100px">{{
+                          reachbyvc
+                        }}</canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

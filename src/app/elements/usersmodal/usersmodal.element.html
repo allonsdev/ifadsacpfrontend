@@ -1,0 +1,56 @@
+<div class="modal fade" id="usersmodal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header m-0">
+        <h6 class="modal-title" id="modal-title-default">Add New User</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-body">
+            <form role="form text-left" class="tab-content">
+              <div class="row mt-3">
+                <div class="col-12 col-sm-6">
+                  <label>StaffMember</label>
+                  <select class="form-control" [(ngModel)]="user.staffMemberId" name="selectedStaffMemberId">
+                    <option *ngFor="let item of staffmembers" [value]="item.id">{{item.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <!-- <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label>Username</label>
+                                    <input class="form-control" type="text" [(ngModel)]="user.username" name="username" required (input)="validateUsername()">
+                                    <span class="text-danger text-sm" *ngIf="usernameexist">Username already exists</span>
+                                  </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <label>Password</label>
+                                    <input class="form-control" type="password" [(ngModel)]="user.password" name="password" required (input)="validatePassword()">
+                                    <span class="text-danger text-sm" *ngIf="passwordInvalid && user.password !== ''">
+                                      Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+                                    </span>
+                                  </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                  <label>Confirm Password</label>
+                                  <input class="form-control" type="password" [(ngModel)]="confirmpassword" name="confirmPassword" (input)="validatePasswordsMatch()" required>
+                                  <span class="text-danger text-sm" *ngIf="!passwordsMatch && confirmpassword !== ''">Passwords do not match</span>
+                                </div>
+                              </div> -->
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-gradient-primary" (click)="createAccount()">Save</button>
+        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

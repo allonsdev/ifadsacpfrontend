@@ -1,0 +1,156 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 col-12 mx-auto">
+      <div class="card card-body">
+        <h6 class="mb-0">Approve Files</h6>
+        <div class="card card-plain">
+          <div class="card-body">
+            <div class="text-start mx-1">
+              <form role="form text-left" class="tab-content">
+                <div class="row mt-3">
+                  <div class="col-12 col-sm-6">
+                    <label>File Type</label>
+                    <input
+                      class="form-control"
+                      name="fileType"
+                      [(ngModel)]="file.fileType"
+                      type="text"
+                    />
+                  </div>
+                  <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                    <label>Title</label>
+                    <input
+                      class="form-control"
+                      name="title"
+                      [(ngModel)]="file.title"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12 col-sm-6">
+                    <label>Author</label>
+                    <input
+                      class="form-control"
+                      name="author"
+                      [(ngModel)]="file.author"
+                      type="text"
+                    />
+                  </div>
+                  <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                    <label>Author Organisation</label>
+                    <input
+                      class="form-control"
+                      name="authorOrganization"
+                      [(ngModel)]="file.authorOrganization"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                    <label>Description</label>
+                    <textarea
+                      class="form-control"
+                      name="description"
+                      [(ngModel)]="file.description"
+                      type="text"
+                    ></textarea>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                    <label>Upload Date</label>
+                    <input
+                      class="form-control"
+                      name="uploadDate"
+                      [(ngModel)]="file.date"
+                      type="date"
+                    />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                    <label>Permitted Staff</label>
+                    <select class="form-control" id="staff" multiple disabled>
+                      <option *ngFor="let item of staff" value="{{ item.id }}">
+                        {{ item.staffFullName }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Buttons for DEO, visible to DEO, Director, and Monitoring, Evaluation and Planning Specialist if DEO hasn't approved yet -->
+                <div
+          
+                >
+                  <button
+                    class="btn btn-success"
+                    (click)="actionfile('Approve', 'DEO')"
+                  >
+                    Approve
+                  </button>
+                  <!-- <button
+                    class="btn btn-danger"
+                    (click)="actionfile('Decline', 'DEO')"
+                  >
+                    Decline as DEO
+                  </button> -->
+                </div>
+
+                <!-- Buttons for PPI, visible to PPI, Director, and Monitoring, Evaluation and Planning Specialist if DEO has approved but PPI hasn't yet -->
+                <!-- <div
+                  *ngIf="
+                    (currentUser.position === 'PPI' ||
+                      currentUser.position === 'Director' ||
+                      currentUser.position ===
+                        'Monitoring, Evaluation and Planning Specialist') &&
+                    file.deoApproved &&
+                    !file.ppiApproved
+                  "
+                >
+                  <button
+                    class="btn btn-success"
+                    (click)="actionfile('Approve', 'PPI')"
+                  >
+                    Approve as PPI
+                  </button>
+                  <button
+                    class="btn btn-danger"
+                    (click)="actionfile('Decline', 'PPI')"
+                  >
+                    Decline as PPI
+                  </button>
+                </div> -->
+              </form>
+              <div class="card-body mt-0">
+                <div class="table-responsive">
+                  <div class="dataTable-wrapper" id="">
+                    <div class="dataTable-container">
+                      <table
+                        class="table table-striped table-bordered table-sm row-border hover"
+                        width="100%"
+                        id="dtFileApproval"
+                      ></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body mt-0">
+                <div class="table-responsive">
+                  <div class="dataTable-wrapper" id="">
+                    <div class="dataTable-container">
+                      <table
+                        class="table table-striped table-bordered table-sm row-border hover"
+                        width="100%"
+                        id="dtDeclinedFile"
+                      ></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer pt-3"></footer>
+    </div>
+  </div>
+</div>

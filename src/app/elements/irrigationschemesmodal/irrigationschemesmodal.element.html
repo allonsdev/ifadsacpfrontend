@@ -1,0 +1,157 @@
+<div class="modal fade" id="irrigationschemesmodal" tabindex="-1" role="dialog"
+    aria-labelledby="irrigationschemeprojects" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header m-0">Indicator Details
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-body">
+                        <form role="form text-left" class="tab-content">
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="name">Name</label>
+                                    <input class="form-control" type="text" id="name" name="name"
+                                        [(ngModel)]="irrigationScheme.name" />
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="schemeManagementModel">Scheme Management Model</label>
+                                    <select class="form-control" id="schemeManagementModel" name="schemeManagementModel"
+                                        [(ngModel)]="irrigationScheme.schemeManagementModel">
+                                        <option *ngFor="let item of schemeManagementModels" value={{item.Name}}>
+                                            {{item.Name}}
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="province">Province</label>
+                                    <select class="form-control" id="province" name="province"
+                                        [(ngModel)]="irrigationScheme.province" (change)="onProvinceSelect($event)">
+                                        <option value="" disabled selected>Select Province</option>
+                                        <option *ngFor="let item of provinces" value={{item.Name}}>{{item.Name}}
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="district">District</label>
+                                    <select class="form-control" id="district" name="district"
+                                        [(ngModel)]="irrigationScheme.district" (change)="onDistrictSelect($event)">
+                                        <option value="" disabled selected>Select District</option>
+                                        <option *ngFor="let item of filteredDistricts" value={{item.Name}}>{{item.Name}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="ward">Ward</label>
+                                    <select class="form-control" id="ward" name="ward"
+                                        [(ngModel)]="irrigationScheme.ward">
+                                        <option *ngFor="let item of filteredWards" value={{item.Name}}>{{item.Name}}
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="agroEcologicalRegion">Agro-Ecological Region</label>
+                                    <select class="form-control" id="agroEcologicalRegion" name="agroEcologicalRegion"
+                                        [(ngModel)]="irrigationScheme.agroEcologicalRegion">
+                                        <option *ngFor="let item of agroEcologicalRegions" value={{item.Name}}>
+                                            {{item.Name}}
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="latitude">Latitude</label>
+                                    <input class="form-control" type="number" id="latitude" name="latitude"
+                                        [(ngModel)]="irrigationScheme.latitude" />
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="longitude">Longitude</label>
+                                    <input class="form-control" type="number" id="longitude" name="longitude"
+                                        [(ngModel)]="irrigationScheme.longitude" />
+                                </div>
+
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="dateEstablished">Date Established</label>
+                                    <input class="form-control" type="date" id="dateEstablished" name="dateEstablished"
+                                        [(ngModel)]="irrigationScheme.dateEstablished" />
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="irrigationSchemeStatus">Irrigation Scheme Status</label>
+                                    <select class="form-control" id="irrigationSchemeStatus"
+                                        name="irrigationSchemeStatus"
+                                        [(ngModel)]="irrigationScheme.irrigationSchemeStatus">
+                                        <option *ngFor="let item of irrigationSchemeStatuses" value={{item.Name}}>
+                                            {{item.Name}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="totalDevelopedAreaToDate">Total Developed Area to Date (Ha)</label>
+                                    <input class="form-control" type="number" id="totalDevelopedAreaToDate"
+                                        name="totalDevelopedAreaToDate"
+                                        [(ngModel)]="irrigationScheme.totalDevelopedAreaToDate" />
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="areaUnderIrrigation">Area Under Irrigation (Ha)</label>
+                                    <input class="form-control" type="number" id="areaUnderIrrigation"
+                                        name="areaUnderIrrigation" [(ngModel)]="irrigationScheme.areaUnderIrrigation" />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="potentialAreaOfScheme">Potential Area of Scheme (Ha)</label>
+                                    <input class="form-control" type="number" id="potentialAreaOfScheme"
+                                        name="potentialAreaOfScheme"
+                                        [(ngModel)]="irrigationScheme.potentialAreaOfScheme" />
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="numberOfIndividuals">Total Number of Beneficiaries</label>
+                                    <input class="form-control" type="number" id="numberOfIndividuals" name="numberOfIndividuals"
+                                        [(ngModel)]="irrigationScheme.numberOfIndividuals" />
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="men">Number of Men</label>
+                                    <input class="form-control" type="number" id="men" name="men"
+                                        [(ngModel)]="irrigationScheme.men" />
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="women">Number of Women</label>
+                                    <input class="form-control" type="number" id="women" name="women"
+                                        [(ngModel)]="irrigationScheme.women" />
+                                </div>
+
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="male">Number of Youths</label>
+                                    <input class="form-control" type="number" id="youth" name="youth"
+                                        [(ngModel)]="irrigationScheme.youth" />
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="irrigationScheme.id === 0 || irrigationScheme.id === undefined" type="button"
+                    class="btn bg-gradient-primary" (click)="createIrrigationScheme()">Save</button>
+                <button *ngIf="irrigationScheme.id > 0 && currentUser.permissions.includes('AddOrEditIrrigationScheme')"
+                    type="button" class="btn bg-gradient-primary" (click)="updateIrrigationScheme()">Update</button>
+                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

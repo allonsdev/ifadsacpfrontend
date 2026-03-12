@@ -1,0 +1,63 @@
+<div class="modal fade" id="editprofilemodal" tabindex="-1" role="dialog" aria-labelledby="editprofilemodal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header m-0">Edit Details
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-body">
+                        <form role="form text-left" class="tab-content">
+                            <div class="tab-pane fade  show active" id="staffdetails" role="tabpanel"
+                                aria-labelledby="staffdetails-tab">
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>First Name</label>
+                                        <input class="form-control" type="text" placeholder="eg. Michael" />
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Last Name</label>
+                                        <input class="form-control" type="text" placeholder="eg. Prior" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Sex</label>
+                                        <select class="form-control">
+                                            <option value="" disabled selected>Select Sex</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>National ID Number</label>
+                                        <input class="form-control" type="text" placeholder="eg. 123456789" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Contact Number</label>
+                                        <input class="form-control" type="tel" placeholder="eg. 555-555-5555" />
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Email Address</label>
+                                        <input class="form-control" type="email"
+                                            placeholder="eg. michael@example.com" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-primary">Save</button>
+                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-header">
+          <h5 class="mb-0">General Activity</h5>
+
+        </div>
+        <div *ngIf="currentUser.permissions.includes('AddOrEditGeneralActivity')" class="text-start mx-4">
+          <button type="button" class="btn bg-gradient-primary mb-3" data-bs-toggle="modal"
+            data-bs-target="#appointmentdetailsmodal" (click)="addnew()">Add General Activity</button>
+        </div>
+        <div class="card-body mt-0">
+          <div class="row mb-3 align-items-end">
+            <div class="col-3 col-sm-3 mt-3 mt-sm-0">
+              <label for="startdate">Start Date</label>
+              <input class="form-control" type="date" id="startdate" name="startDate" [(ngModel)]="startDate" (change)="filter()" />
+            </div>
+            <div class="col-3 col-sm-3 mt-3 mt-sm-0">
+              <label for="enddate">End Date</label>
+              <input class="form-control" type="date" id="enddate" name="endDate" [(ngModel)]="endDate" (change)="filter()" />
+            </div>
+            <div class="col-3 col-sm-3 mt-3 mt-sm-0">
+              <button type="button" class="btn bg-gradient-secondary m-0" (click)="resetFilter()">reset</button>
+            </div>
+          </div>
+          
+          <div class="table-responsive">
+            <div class="dataTable-wrapper " id="">
+              <div class="dataTable-container ">
+                <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                  id="dtGeneralActivity">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer pt-3">
+
+  </footer>
+
+  <div class="row">
+    <div class="col-md-4">
+      <appointmentdetailsmodal #appointmentdetailsmodal [editid]="editObject" [otherFacilitatorIds]="otherfacilitators"
+        (refresh)="getRegister()"></appointmentdetailsmodal>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,184 @@
+<div class="modal fade" id="projectdetailsmodal" tabindex="-1" role="dialog" aria-labelledby="editprofilemodal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header m-0">Add New Project
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-body">
+                        <div class="card-header pb-0 text-left pt-0">
+                            <div class="nav-wrapper position-relative end-0">
+                                <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab"
+                                            href="#generalprojectdetails" role="tab"
+                                            aria-controls="generalprojectdetails" aria-selected="true">
+                                            General Project Details
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#budgetdetails"
+                                            role="tab" aria-controls="budgetdetails" aria-selected="false">
+                                            Budget Details
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#beneficiaries"
+                                            role="tab" aria-controls="beneficiaries" aria-selected="false">
+                                            Beneficiaries Details
+                                        </a>
+                                    </li>
+                                    <div class="moving-tab position-absolute nav-link"
+                                        style="padding: 0px; transition: all 0.5s ease 0s; transform: translate3d(291px, 0px, 0px); width: 299px;">
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                        <form role="form text-left" class="tab-content">
+                            <div class="tab-pane fade  show active" id="generalprojectdetails" role="tabpanel"
+                                aria-labelledby="generalprojectdetails-tab">
+                                <div class="row mt-3">
+
+                                    <div class="col-12 col-sm-6">
+                                        <label>Country</label>
+                                        <select class="form-control">
+                                            <option value="" disabled selected>Select Country</option>
+                                            <option value="corporation">Zim</option>
+                                            <option value="partnership">SA</option>
+                                            <option value="soleproprietorship">Zam</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label>Project Name</label>
+                                        <input class="form-control" type="text" placeholder="eg. Michael" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Project Code</label>
+                                        <input class="form-control" type="text" placeholder="eg. Michael" />
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Project Acronym</label>
+                                        <input class="form-control" type="text" placeholder="eg. Prior" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Active Status</label>
+                                        <select class="form-control">
+                                            <option value="" disabled selected>Select Status</option>
+                                            <option value="male">Active</option>
+                                            <option value="female">Completed</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Final Goal Statement</label>
+                                        <textarea class="form-control" type="text" placeholder="eg. Michael"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Project Manager</label>
+                                        <select class="form-control">
+                                            <option value="" disabled selected>Select Manager</option>
+                                            <option value="manager">managers</option>
+                                            <option value="supervisor">Supervisor</option>
+                                            <option value="analyst">Analyst</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Start Date</label>
+                                        <input class="form-control" type="date" placeholder="eg. michael@example.com" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>End Date</label>
+                                        <input class="form-control" type="date" placeholder="eg. michael@example.com" />
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Evaluation Date</label>
+                                        <input class="form-control" type="date" placeholder="eg. michael@example.com" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="budgetdetails" role="tabpanel"
+                                aria-labelledby="budgetdetails-tab">
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Total Project Budget</label>
+                                        <input class="form-control" type="number" placeholder="eg. Michael" />
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label>Total Received</label>
+                                        <input class="form-control" type="number" placeholder="eg. Michael" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Total Spent</label>
+                                        <input class="form-control" type="number" placeholder="eg. Michael" />
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label>Balance</label>
+                                        <input class="form-control" type="number" placeholder="eg. Michael" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="beneficiaries" role="tabpanel"
+                                aria-labelledby="beneficiaries-tab">
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Beneficiary Description</label>
+                                        <textarea class="form-control" type="text" placeholder="eg. Michael"></textarea>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label>Stakeholder Description</label>
+                                        <textarea class="form-control" type="text" placeholder="eg. Michael"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Targeted No Of Direct Beneficiaries</label>
+                                        <input class="form-control" type="number">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Men</label>
+                                        <input class="form-control" type="number">
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Women</label>
+                                        <input class="form-control" type="number">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Boys</label>
+                                        <input class="form-control" type="number">
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                        <label>Girls</label>
+                                        <input class="form-control" type="number">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-primary">Save</button>
+                <button type="button" class="btn bg-gradient-danger">Delete</button>
+                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

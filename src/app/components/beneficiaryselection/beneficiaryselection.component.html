@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-header">
+          <h5 class="mb-0">Beneficiary Selection</h5>
+        </div>
+
+        <div class="row m-3">
+          <div class="col-12 col-sm-6">
+            <label for="selectedcolumn">Select Columns</label>
+            <select multiple class="form-control" id="selectedcolumn" name="selectedcolumn"
+              [(ngModel)]="selectedcolumns">
+              <option *ngFor="let item of columns" value={{item.data}}>{{item.title}}</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6">
+            <button type="button" class="btn bg-gradient-primary mb-3" (click)="showData()">Show
+              Records</button>
+          </div>
+        </div>
+
+        <div class="card-body mt-0">
+          <div class="table-responsive">
+            <div class="dataTable-wrapper " id="">
+              <div class="dataTable-container ">
+                <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                  id="dtEOIBeneficiaries">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="currentUser.permissions.includes('SelectData')" class="text-start mx-4">
+          <button type="button" class="btn bg-gradient-primary mb-3" (click)="sendSelectedData()">Save Selected
+            Records</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer pt-3">
+    
+  </footer>
+
+</div>

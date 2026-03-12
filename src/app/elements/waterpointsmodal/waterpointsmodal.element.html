@@ -1,0 +1,107 @@
+<div class="modal fade" id="waterpointsmodal" tabindex="-1" role="dialog" aria-labelledby="irrigationschemeprojects"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header m-0">Water Point
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-body">
+                        <form role="form text-left" class="tab-content">
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="name">Name</label>
+                                    <input class="form-control" type="text" id="name" [(ngModel)]="waterPoint.name"
+                                        name="name">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="province">Province</label>
+                                    <select class="form-control" id="province" [(ngModel)]="waterPoint.province"
+                                        name="province" (change)="onProvinceSelect($event)">
+                                        <option value="" disabled selected>Select Province</option>
+                                        <option *ngFor="let item of provinces" value={{item.Name}}>{{item.Name}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="district">District</label>
+                                    <select class="form-control" id="district" [(ngModel)]="waterPoint.district"
+                                        name="district" (change)="onDistrictSelect($event)">
+                                        <option value="" disabled selected>Select District</option>
+                                        <option *ngFor="let item of filteredDistricts" value={{item.Name}}>{{item.Name}}
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="ward">Ward</label>
+                                    <select class="form-control" id="ward" [(ngModel)]="waterPoint.ward" name="ward">
+                                        <option *ngFor="let item of filteredWards" value={{item.Name}}>{{item.Name}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="village">Village</label>
+                                    <input class="form-control" type="text" id="village"
+                                        [(ngModel)]="waterPoint.village" name="village">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="latitude">Latitude</label>
+                                    <input class="form-control" type="number" id="latitude"
+                                        [(ngModel)]="waterPoint.latitude" name="latitude">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="longitude">Longitude</label>
+                                    <input class="form-control" type="number" id="longitude"
+                                        [(ngModel)]="waterPoint.longitude" name="longitude">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="numberOfHouseholds">Number of Households</label>
+                                    <input class="form-control" type="number" id="numberOfHouseholds"
+                                        [(ngModel)]="waterPoint.numberOfHouseholds" name="numberOfHouseholds">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="numberOfIndividuals">Number of Individuals</label>
+                                    <input class="form-control" type="number" id="numberOfIndividuals"
+                                        [(ngModel)]="waterPoint.numberOfIndividuals" name="numberOfIndividuals">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="men">Men</label>
+                                    <input class="form-control" type="number" id="men" [(ngModel)]="waterPoint.men"
+                                        name="men">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="women">Women</label>
+                                    <input class="form-control" type="number" id="women" [(ngModel)]="waterPoint.women"
+                                        name="women">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="youth">Youth</label>
+                                    <input class="form-control" type="number" id="youth" [(ngModel)]="waterPoint.youth"
+                                        name="youth">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="waterPoint.id === 0 || waterPoint.id === undefined" type="button"
+                    class="btn bg-gradient-primary" (click)="createWaterPoint()">Save</button>
+                <button *ngIf="waterPoint.id > 0 && currentUser.permissions.includes('AddOrEditWaterPoint')"
+                    type="button" class="btn bg-gradient-primary" (click)="updateWaterPoint()">Update</button>
+                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

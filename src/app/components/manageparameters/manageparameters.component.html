@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0 p-3">
+                    <h6>Parameters List</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-3 ">
+                        <div class="dataTable-wrapper " id="">
+                            <div class="dataTable-container ">
+                                <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                                    id="dtParameters">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <td class="text-sm font-weight-normal">ListName</td>
+                                            <td class="text-sm font-weight-normal">ListDescription</td>
+                                            <td *ngIf="currentUser.permissions.includes('AlterParameter')"
+                                                class="text-sm font-weight-normal">Options</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let parameter of parameters">
+                                            <td class="text-sm font-weight-normal">{{ parameter.ListName }}</td>
+                                            <td class="text-sm font-weight-normal">{{ parameter.ListDescription }}</td>
+                                            <td *ngIf="currentUser.permissions.includes('AlterParameter')"
+                                                class="align-middle text-end">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-icon-only btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center ms-3 px-3"
+                                                    data-bs-toggle="modal" data-bs-target="#manageparametersmodal"
+                                                    (click)="openModal(parameter)">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <manageparametersmodal [parameter]="selectedParameter"></manageparametersmodal>
+        </div>
+    </div>
+</div>

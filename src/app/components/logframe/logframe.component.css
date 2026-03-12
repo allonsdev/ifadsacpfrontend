@@ -1,0 +1,29 @@
+/* table.component.css */
+
+.table-container {
+    overflow-x: auto; /* Horizontal scroll if necessary */
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed; /* Ensures table does not expand beyond its container */
+  }
+  
+  th, td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap; /* Prevents wrapping of content */
+    overflow: hidden; /* Hides content that overflows its cell */
+    text-overflow: ellipsis; /* Shows ellipsis (...) for truncated content */
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #dddddd;
+  }
+  

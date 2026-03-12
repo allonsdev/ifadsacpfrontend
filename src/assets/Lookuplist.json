@@ -1,0 +1,240 @@
+[
+  {
+    "ListName": "Activity Statuses",
+    "ListDescription": "List of Activity Statuses",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luActivityStatuses]",
+    "TableName": "luActivityStatuses",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Activity Types",
+    "ListDescription": "List of Activity Types",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luActivityTypes]",
+    "TableName": "luActivityTypes",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Agro Ecological Regions",
+    "ListDescription": "List of Agro Ecological Regions",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luAgroEcologicalRegions]",
+    "TableName": "luAgroEcologicalRegions",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Clusters",
+    "ListDescription": "List of Clusters",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luClusters]",
+    "TableName": "luClusters",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Commands",
+    "ListDescription": "List of Commands",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luCommands]",
+    "TableName": "luCommands",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Components",
+    "ListDescription": "List of Components",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luComponents]",
+    "TableName": "luComponents",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Data Collection Frequencies",
+    "ListDescription": "List of Data Collection Frequencies",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luDataCollectionFrequencies]",
+    "TableName": "luDataCollectionFrequencies",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Data Collection Methods",
+    "ListDescription": "List of Data Collection Methods",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luDataCollectionMethods]",
+    "TableName": "luDataCollectionMethods",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Data Sources",
+    "ListDescription": "List of Data Sources",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luDataSources]",
+    "TableName": "luDataSources",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Departments",
+    "ListDescription": "List of Departments",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luDepartments]",
+    "TableName": "luDepartments",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Disaggregation Labels",
+    "ListDescription": "List of Disaggregation Labels",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luDisaggregationLabels]",
+    "TableName": "luDisaggregationLabels",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Districts",
+    "ListDescription": "List of Districts",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luDistricts]",
+    "TableName": "luDistricts",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "File Types",
+    "ListDescription": "List of File Types",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luFileTypes]",
+    "TableName": "luFileTypes",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Functionalities",
+    "ListDescription": "List of Functionalities",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luFunctionalities]",
+    "TableName": "luFunctionalities",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Gender",
+    "ListDescription": "List of Genders",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luGender]",
+    "TableName": "luGender",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Group Types",
+    "ListDescription": "List of Group Types",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luGroupTypes]",
+    "TableName": "luGroupTypes",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Indicator Categories",
+    "ListDescription": "List of Indicator Categories",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luIndicatorCategories]",
+    "TableName": "luIndicatorCategories",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Indicator Types",
+    "ListDescription": "List of Indicator Types",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luIndicatorTypes]",
+    "TableName": "luIndicatorTypes",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Interventions",
+    "ListDescription": "List of Interventions",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luInterventions]",
+    "TableName": "luInterventions",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Irrigation Scheme Statuses",
+    "ListDescription": "List of Irrigation Scheme Statuses",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luIrrigationSchemeStatuses]",
+    "TableName": "luIrrigationSchemeStatuses",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Object Types",
+    "ListDescription": "List of Object Types",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luObjectTypes]",
+    "TableName": "luObjectTypes",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Organisation Types",
+    "ListDescription": "List of Organisation Types",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luOrganisationTypes]",
+    "TableName": "luOrganisationTypes",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Participant Types",
+    "ListDescription": "List of Participant Types",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luParticipantTypes]",
+    "TableName": "luParticipantTypes",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Project Active Statuses",
+    "ListDescription": "List of Project Active Statuses",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luProjectActiveStatuses]",
+    "TableName": "luProjectActiveStatuses",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Provinces",
+    "ListDescription": "List of Provinces",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luProvinces]",
+    "TableName": "luProvinces",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Scheme Management Models",
+    "ListDescription": "List of Scheme Management Models",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luSchemeManagementModels]",
+    "TableName": "luSchemeManagementModels",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Site Types",
+    "ListDescription": "List of Site Types",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luSiteTypes]",
+    "TableName": "luSiteTypes",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Staff Positions",
+    "ListDescription": "List of Staff Positions",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luStaffPositions]",
+    "TableName": "luStaffPositions",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Sub Components",
+    "ListDescription": "List of Sub Components",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luSubComponents]",
+    "TableName": "luSubComponents",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Tools",
+    "ListDescription": "List of Tools",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luTools]",
+    "TableName": "luTools",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Types Of Business",
+    "ListDescription": "List of Types Of Business",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luTypesOfBusiness]",
+    "TableName": "luTypesOfBusiness",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Types Of Evaluation",
+    "ListDescription": "List of Types Of Evaluation",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luTypesOfEvaluation]",
+    "TableName": "luTypesOfEvaluation",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Units Of Measurement",
+    "ListDescription": "List of Units Of Measurement",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luUnitsOfMeasurement]",
+    "TableName": "luUnitsOfMeasurement",
+    "PrimaryKey": "Id"
+  },
+  {
+    "ListName": "Wards",
+    "ListDescription": "List of Wards",
+    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luWards]",
+    "TableName": "luWards",
+    "PrimaryKey": "Id"
+  }
+]

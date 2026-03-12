@@ -1,0 +1,115 @@
+<div class="modal fade" id="individualstakeholderdetailsmodal" tabindex="-1" role="dialog"
+    aria-labelledby="individualstakeholderdetailsmodal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header m-0">
+                <h6 class="modal-title" id="modal-title-default">Stakeholder Details</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+            </div>
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-body">
+                        <form role="form text-left" class="tab-content">
+                            <div class="tab-pane fade show active" id="staffdetails" role="tabpanel"
+                                aria-labelledby="staffdetails-tab">
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>District</label>
+                                        <select class="form-control" name="districtId"
+                                            [(ngModel)]="staffMember.districtId">
+                                            <option *ngFor="let item of districts" value={{item.Id}}>{{item.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label>Organisation Name</label>
+                                        <select class="form-control" name="organisationId"
+                                            [(ngModel)]="staffMember.organisationId">
+                                            <option *ngFor="let item of organisations" value={{item.id}}>
+                                                {{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>First Name</label>
+                                        <input class="form-control" type="text" name="firstName"
+                                            [(ngModel)]="staffMember.firstName" />
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label>Last Name</label>
+                                        <input class="form-control" type="text" name="surname"
+                                            [(ngModel)]="staffMember.surname" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Sex</label>
+                                        <select class="form-control" name="sex" [(ngModel)]="staffMember.sex">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label>National ID Number</label>
+                                        <input class="form-control" type="text" name="nationalIdNumber"
+                                            [(ngModel)]="staffMember.nationalIdNumber" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Physical Address</label>
+                                        <textarea class="form-control" name="address"
+                                            [(ngModel)]="staffMember.address"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Contact Number</label>
+                                        <input class="form-control" type="tel" name="contactNo"
+                                            [(ngModel)]="staffMember.contactNo" />
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label>Email Address</label>
+                                        <input class="form-control" type="email" name="emailAddress"
+                                            [(ngModel)]="staffMember.emailAddress" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+
+                                    <div class="col-12 col-sm-6">
+                                        <label>Department</label>
+                                        <select class="form-control" name="departmentId"
+                                            [(ngModel)]="staffMember.departmentId">
+                                            <option *ngFor="let item of departments" value={{item.Id}}>{{item.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label>Position</label>
+                                        <select class="form-control" name="positionId"
+                                            [(ngModel)]="staffMember.positionId">
+                                            <option *ngFor="let item of positions" value={{item.Id}}>{{item.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="(staffMember.id === 0 || staffMember.id === undefined)" type="button"
+                    class="btn bg-gradient-primary" (click)="createStaffMember()">Save</button>
+                <button *ngIf="staffMember.id > 0 && currentUser.permissions.includes('AddOrEditStaffMember')"
+                    type="button" class="btn bg-gradient-primary" (click)="updateStaffMember()">Update</button>
+                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

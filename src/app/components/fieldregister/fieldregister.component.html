@@ -1,0 +1,91 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-header">
+          <h5 class="mb-0">Field Register</h5>
+        </div>
+
+        <div class="card-body mt-0">
+          <div class="table-responsive">
+            <div class="dataTable-wrapper " id="">
+              <div class="dataTable-container ">
+                <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                  id="dtFieldRegister">
+                  <thead class="thead-light">
+                    <tr>
+                      <td class="text-sm font-weight-normal">Activity Name</td>
+                      <td class="text-sm font-weight-normal">Date</td>
+                      <td class="text-sm font-weight-normal">Date of Birth</td>
+                      <td class="text-sm font-weight-normal">District</td>
+                      <td class="text-sm font-weight-normal">Enumerator</td>
+                      <td class="text-sm font-weight-normal">Formhub Uuid</td>
+                      <td class="text-sm font-weight-normal">Household Head</td>
+                      <td class="text-sm font-weight-normal">Household Head Sex</td>
+                      <td class="text-sm font-weight-normal">ID</td>
+                      <td class="text-sm font-weight-normal">ID Number</td>
+                      <td class="text-sm font-weight-normal">Kobo Beneficiary ID</td>
+                      <td class="text-sm font-weight-normal">Meta Instance ID</td>
+                      <td class="text-sm font-weight-normal">Organization Name</td>
+                      <td class="text-sm font-weight-normal">Phone Number</td>
+                      <td class="text-sm font-weight-normal">Province</td>
+                      <td class="text-sm font-weight-normal">Submission Status</td>
+                      <td class="text-sm font-weight-normal">Submission Time</td>
+                      <td class="text-sm font-weight-normal">Submitted By</td>
+                      <td class="text-sm font-weight-normal">UUID</td>
+                      <td class="text-sm font-weight-normal">Ward</td>
+                      <td class="text-sm font-weight-normal">X Form ID String</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let beneficiary of beneficiaries">
+                      <td class="text-sm font-weight-normal">{{ beneficiary.activityName }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.date }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.dateOfBirth }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.district }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.enumerator }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.formhubUuid }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.householdHead }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.householdHeadSex }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.id }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.idNumber }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.koboBeneficiaryId }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.metaInstanceID }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.organizationName }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.phoneNumber }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.province }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.submissionStatus }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.submissionTime }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.submittedBy }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.uuid }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.ward }}</td>
+                      <td class="text-sm font-weight-normal">{{ beneficiary.xFormIdString }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-start mx-4">
+          <button type="button" class="btn bg-gradient-primary mb-3" (click)="sendSelectedData()">Save Selected
+            Records</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer pt-3">
+    
+  </footer>
+
+  <div class="row">
+    <div class="col-md-4">
+      <beneficiariesuploadmodal></beneficiariesuploadmodal>
+    </div>
+  </div>
+
+</div>

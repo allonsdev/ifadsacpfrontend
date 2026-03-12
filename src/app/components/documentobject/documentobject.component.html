@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-header">
+                    <h5 class="mb-0">Map Documents to Objects</h5>
+
+                </div>
+                <div class="card-body mt-0">
+                    <div class="table-responsive">
+                        <div class="dataTable-wrapper " id="">
+                            <div class="dataTable-container ">
+                                <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                                    id="dtDocuments">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body mt-0">
+                    <div class="row mb-2">
+                        <div class="col-12 col-sm-6">
+                            <label for="objectType">Participant Type</label>
+                            <select class="form-control" id="objectType" (change)="onSelect()"
+                                [(ngModel)]="selectedValue">
+                                <option value="" selected disabled>Select Object Type</option>
+                                <option *ngFor="let item of objectTypes" value={{item.Id}}>
+                                    {{item.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body mt-0">
+                        <div class="table-responsive">
+                            <div class="dataTable-wrapper " id="">
+                                <div class="dataTable-container ">
+                                    <table class="table table-striped table-bordered table-sm row-border hover"
+                                        width="100%" id="dtObjects">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-start mx-4">
+                    <button type="button" class="btn bg-gradient-primary mb-3"
+                        (click)="sendSelectedData()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer pt-3">
+        
+    </footer>
+
+</div>

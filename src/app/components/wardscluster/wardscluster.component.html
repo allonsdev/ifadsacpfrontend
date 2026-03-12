@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-header">
+                    <h5 class="mb-0">Map Wards to Clusters</h5>
+                </div>
+                <div class="text-start mx-4">
+                    <div class="row mt-3">
+                        <div class="col-12 col-sm-6">
+                            <label for="clusterId">Cluster</label>
+                            <select class="form-control" id="clusterId" name="clusterId" [(ngModel)]="clusterId"
+                                (change)="onclusterselect()">
+                                <option *ngFor="let item of clusters" value={{item.Id}}>{{item.Name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body mt-0">
+                    <div class="table-responsive">
+                        <div class="dataTable-wrapper " id="">
+                            <div class="dataTable-container ">
+                                <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                                    id="dtClusterWards">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-start mx-4">
+                    <button type="button" class="btn bg-gradient-primary mb-3"
+                        (click)="sendSelectedData()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer pt-3">
+        
+    </footer>
+
+</div>

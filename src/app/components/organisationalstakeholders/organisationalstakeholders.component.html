@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-header">
+          <h5 class="mb-0">Organisational Stakeholders</h5>
+
+        </div>
+        <div class="text-start mx-4">
+          <button *ngIf="currentUser.permissions.includes('AddOrEditOrganisation')" type="button"
+            class="btn bg-gradient-primary mb-3" data-bs-toggle="modal"
+            data-bs-target="#organisationalstakeholderdetailsmodal" (click)="addnew()">Add New Stakeholder</button>
+        </div>
+
+        <div class="card-body mt-0">
+          <div class="table-responsive">
+            <div class="dataTable-wrapper " id="">
+              <div class="dataTable-container ">
+                <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                  id="dtOrganisation">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer pt-3">
+    
+  </footer>
+
+  <div class="row">
+    <div class="col-md-4">
+      <organisationalstakeholderdetailsmodal #organisationalstakeholderdetailsmodal [editid]="editObject" (refresh)="getRegister()">
+      </organisationalstakeholderdetailsmodal>
+    </div>
+  </div>
+
+</div>

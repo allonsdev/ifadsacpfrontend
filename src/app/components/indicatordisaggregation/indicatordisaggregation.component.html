@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 col-12 mx-auto">
+            <div class="card card-body">
+                <h6 class="mb-0">Indicator Disaggregation Label</h6>
+                <hr class="horizontal dark my-3">
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="unitOfMeasurement" class="form-label"> Units Of Measurement</label>
+                            <select class="form-control" name="unitOfMeasurement" [(ngModel)]="unitOfMeasurement" (change)="getRegister()">
+                                <option value={{item.Name}} *ngFor="let item of unitsOfMeasurements">{{item.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="disaggregationlabel" class="form-label">Disaggregation Label</label>
+                            <input class="form-control" name="disaggregationLabel" [(ngModel)]="disaggregationLabel" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="currentUser.permissions.includes('AddDisaggregationLabel')" class="text-start mx-1">
+                    <button type="button" class="btn bg-gradient-primary mb-3" (click)="save()">Save</button>
+                </div>
+                <div class="card-body mt-0">
+                    <div class="table-responsive">
+                        <div class="dataTable-wrapper " id="">
+                            <div class="dataTable-container ">
+                                <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                                    id="dtDisaggregationLabels">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer pt-3 ">
+        
+    </footer>
+</div>
