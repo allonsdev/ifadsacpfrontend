@@ -115,84 +115,129 @@ export class AppointmentsComponent implements OnInit {
       data: key,
       title: key,
     }));
+const actionButtons = [
+  // EDIT BUTTON
+  {
+    data: 'action',
+    defaultContent:
+      '<button class="btn btn-sm btn-icon-only btn-outline-secondary mb-0 d-flex align-items-center justify-content-center px-3" data-bs-toggle="modal" data-bs-target="#appointmentdetailsmodal"><i class="fa fa-pencil"></i></button>',
+    title: '',
+    createdCell: (
+      cell: any,
+      cellData: any,
+      rowData: any,
+      rowIndex: number,
+      colIndex: number
+    ) => {
+      $(cell).on('click', () => {
+        this.getFacilitators(rowData.Id);
+        this.editObject = rowData.Id;
+        console.log(rowData.Id, rowData);
+      });
+    },
+  },
 
-    const actionButtons = [
-      {
-        data: 'action',
-        defaultContent:
-          '<button class="btn btn-sm btn-icon-only btn-outline-secondary mb-0 btn-sm d-flex align-items-center justify-content-center px-3" data-bs-toggle="modal" data-bs-target="#appointmentdetailsmodal"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
-        title: '',
-        createdCell: (
-          cell: any,
-          cellData: any,
-          rowData: any,
-          rowIndex: number,
-          colIndex: number
-        ) => {
-          $(cell).on('click', () => {
-            this.getFacilitators(rowData.Id);
-            this.editObject = rowData.Id;
-            console.log(rowData.Id, rowData);
-          });
-        },
-      },
-    {
-  data: 'action',
-  title: '',
-  defaultContent:
-    '<button class="btn btn-sm btn-success d-flex align-items-center justify-content-center px-3"><i class="fa fa-download" aria-hidden="true"></i></button>',
-  createdCell: (
-    cell: any,
-    cellData: any,
-    rowData: any,
-    rowIndex: number,
-    colIndex: number
-  ) => {
+  // DOWNLOAD BUTTON
+  {
+    data: 'action',
+    title: '',
+    defaultContent:
+      '<button class="btn btn-sm btn-success d-flex align-items-center justify-content-center px-3"><i class="fa fa-download"></i></button>',
+    createdCell: (
+      cell: any,
+      cellData: any,
+      rowData: any,
+      rowIndex: number,
+      colIndex: number
+    ) => {
+      $(cell).on('click', () => {
+        const url =
+          apiUrl + '/GeneralActivity/DownloadParticipants/' + rowData.Id;
 
-    $(cell).on('click', () => {
+        this.http.get(url, { responseType: 'blob' }).subscribe(
+          (response: Blob) => {
+            const blob = new Blob([response], {
+              type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            });
 
-      const url = apiUrl + '/GeneralActivity/DownloadParticipants/' + rowData.Id;
+            const downloadUrl = window.URL.createObjectURL(blob);
 
-      this.http.get(url, { responseType: 'blob' }).subscribe(
-        (response: Blob) => {
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = 'Participants_' + rowData.Id + '.xlsx';
+            link.click();
 
-          const blob = new Blob([response], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          });
+            window.URL.revokeObjectURL(downloadUrl);
 
-          const downloadUrl = window.URL.createObjectURL(blob);
+            Swal.fire({
+              icon: 'success',
+              title: 'Participants',
+              text: 'Excel download started successfully',
+            });
+          },
+          () => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Participants',
+              text: 'Error downloading Excel file',
+            });
+          }
+        );
+      });
+    },
+  },
 
-          const link = document.createElement('a');
-          link.href = downloadUrl;
-          link.download = 'Participants_' + rowData.Id + '.xlsx';
-          link.click();
+  // DELETE BUTTON
+  {
+    data: 'action',
+    title: '',
+    defaultContent:
+      '<button class="btn btn-sm btn-danger d-flex align-items-center justify-content-center px-3"><i class="fa fa-trash"></i></button>',
+    createdCell: (
+      cell: any,
+      cellData: any,
+      rowData: any,
+      rowIndex: number,
+      colIndex: number
+    ) => {
+      $(cell).on('click', () => {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'This record will be permanently deleted!',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const url = apiUrl + '/GeneralActivity/' + rowData.Id;
 
-          window.URL.revokeObjectURL(downloadUrl);
+            this.http.delete(url).subscribe(
+              () => {
+                Swal.fire(
+                  'Deleted!',
+                  'The record has been deleted.',
+                  'success'
+                );
 
-          Swal.fire({
-            icon: 'success',
-            title: 'Participants',
-            text: 'Excel download started successfully'
-          });
-
-        },
-        (error) => {
-
-          Swal.fire({
-            icon: 'error',
-            title: 'Participants',
-            text: 'Error downloading Excel file'
-          });
-
-        }
-      );
-
-    });
-
-  }
-}
-      
-    ];
+                // remove row from table
+                this.dataTable.row($(cell).parents('tr')).remove().draw();
+              },
+              () => {
+                Swal.fire(
+                  'Error!',
+                  'Something went wrong while deleting.',
+                  'error'
+                );
+              }
+            );
+          }
+        });
+      });
+    },
+  },
+];
 
     // Ensure action buttons come FIRST
     const updatedColumns = [...actionButtons, ...columns];
