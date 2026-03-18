@@ -83,8 +83,8 @@ const apiUrl = environment.apiUrl;
 
 export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
   generalActivity: GeneralActivity = new GeneralActivity();
-    stakeholder:StakeholderUploadComponent= new StakeholderUploadComponent();
-participants: StakeholderParticipantModel[] = [];
+  stakeholder: StakeholderUploadComponent = new StakeholderUploadComponent();
+  participants: StakeholderParticipantModel[] = [];
   participant: {
     gtid: number | null;
     hhNationalId: string;
@@ -98,23 +98,23 @@ participants: StakeholderParticipantModel[] = [];
     pwdTin: string;
     hhGender: string;
     contactNumber: string;
-    
-  } = {
-    gtid: null,
-    hhNationalId: '',
-    firstName: '',
-    surname: '',
-    gender: '',
-    yearOfBirth: null,
-    groupType: '',
-    categoryName: '',
-    participantNationalId: '',
-    pwdTin: '',
-    hhGender: '',
-    contactNumber: '',
-    
 
-  };
+  } = {
+      gtid: null,
+      hhNationalId: '',
+      firstName: '',
+      surname: '',
+      gender: '',
+      yearOfBirth: null,
+      groupType: '',
+      categoryName: '',
+      participantNationalId: '',
+      pwdTin: '',
+      hhGender: '',
+      contactNumber: '',
+
+
+    };
 
   @Output() refresh: EventEmitter<any> = new EventEmitter();
   @Input() otherFacilitatorIds: number[] = [];
@@ -140,7 +140,8 @@ participants: StakeholderParticipantModel[] = [];
   districts: any[] = [];
   facilitators: any[] = [];
   otherfacilitators: any[] = [];
-uploadResults: any;
+  uploadResults: any;
+  uploadStakeholdersResults: any;
   private apiUrl = apiUrl;
   participantTypes: any;
   siteTypes: any;
@@ -158,13 +159,13 @@ uploadResults: any;
   participantType: any;
   data: any;
   minEndDate: any;
-subActivities: any[] = [];      // list of all sub-activities
-filteredSubActivities: any[] = []; 
+  subActivities: any[] = [];      // list of all sub-activities
+  filteredSubActivities: any[] = [];
   constructor(
     private cdRef: ChangeDetectorRef,
     private http: HttpClient,
     private FileuploadService: FileuploadService
-  ) {}
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.editid != 0) {
@@ -194,50 +195,51 @@ filteredSubActivities: any[] = [];
 
 
   loadActivities(): void {
+    console.log("hieeeeeee")
     const selectedSubCompId = +this.generalActivity.subComponentId!;
     console.log("Selected SubComponent:", selectedSubCompId);
 
     // ✅ Filter activities that belong to the selected subcomponent
     this.filteredSubActivities = this.activities.filter(
-    (activity: any) => Number(activity.id) === this.generalActivity.activityId
-  );
+      (activity: any) => Number(activity.id) === this.generalActivity.activityId
+    );
 
-     console.log("Selected filtered:", this.filteredSubActivities);
+    console.log("Selected filtered:", this.filteredSubActivities);
 
     // ✅ Reset activity if current selection doesn't belong to this subcomponent
     const currentActivityId = this.generalActivity.activityId;
-     console.log("Selected aCTIVITT:", currentActivityId);
-  
+    console.log("Selected aCTIVITT:", currentActivityId);
+
   }
 
 
 
 
-onSubComponentSelect(event: any) {
-  const selectedId = Number(event.target.value);
-  console.log("Selected ID:", selectedId, typeof selectedId);
+  onSubComponentSelect(event: any) {
+    const selectedId = Number(event.target.value);
+    console.log("Selected ID:", selectedId, typeof selectedId);
 
-  this.filteredSubActivities = this.activities.filter(
-    (activity: any) => Number(activity.activityId) === selectedId
-  );
+    this.filteredSubActivities = this.activities.filter(
+      (activity: any) => Number(activity.activityId) === selectedId
+    );
 
-  console.log("Filtered Activities:", this.filteredSubActivities);
-}
+    console.log("Filtered Activities:", this.filteredSubActivities);
+  }
 
 
- onActivitySelect(): void {
-  const selectedActivityId = Number(this.generalActivity.activityId);
+  onActivitySelect(): void {
+    const selectedActivityId = Number(this.generalActivity.activityId);
 
-  // Filter sub-activities for selected activity
-  this.filteredSubActivities = this.subActivities.filter(
-    sa => Number(sa.activityId) === selectedActivityId
-  );
+    // Filter sub-activities for selected activity
+    this.filteredSubActivities = this.subActivities.filter(
+      sa => Number(sa.activityId) === selectedActivityId
+    );
 
-  // Auto-select first sub-activity or clear
-  this.generalActivity.subActivityId = this.filteredSubActivities.length > 0
-    ? this.filteredSubActivities[0].id
-    : null;
-}
+    // Auto-select first sub-activity or clear
+    this.generalActivity.subActivityId = this.filteredSubActivities.length > 0
+      ? this.filteredSubActivities[0].id
+      : null;
+  }
 
   readExcelFile(event: any) {
     if (event.target.files.length === 0) {
@@ -292,292 +294,272 @@ onSubComponentSelect(event: any) {
     fileReader.readAsArrayBuffer(file);
   }
 
- displayData() {
-  if (!this.excelData || this.excelData.length === 0) {
-    Swal.fire({
-      icon: 'info',
-      title: 'No Data',
-      text: 'No Excel data available to display.'
-    });
-    return;
-  }
-
-  Swal.fire({
-    title: 'Generating Preview...',
-    allowOutsideClick: false,
-    didOpen: () => {
-      Swal.showLoading();
-    },
-  });
-
-  // Prepare columns dynamically based on keys from the first record
-  const columns: any[] = Object.keys(this.excelData[0]).map((key) => ({
-    data: key,
-    title: key,
-  }));
-
-  // Clear and destroy previous DataTable if exists
-  if (this.excelDataTable) {
-    this.excelDataTable.clear().destroy();
-    const dataTableElement = $('#dtPreview');
-    if (dataTableElement.length) {
-      dataTableElement.empty();
-    }
-  }
-
-  // Initialize your DataTable with the Excel data and columns
-  this.initializeExcelDataTable(this.excelData);
-
-  Swal.close();
-}
-
- displayData2() {
-  if (!this.excelData || this.excelData.length === 0) {
-    Swal.fire({
-      icon: 'info',
-      title: 'No Data',
-      text: 'No Excel data available to display.'
-    });
-    return;
-  }
-
-  Swal.fire({
-    title: 'Generating Preview...',
-    allowOutsideClick: false,
-    didOpen: () => {
-      Swal.showLoading();
-    },
-  });
-
-  // Prepare columns dynamically based on keys from the first record
-  const columns: any[] = Object.keys(this.excelData[0]).map((key) => ({
-    data: key,
-    title: key,
-  }));
-
-  // Clear and destroy previous DataTable if exists
-  if (this.excelDataTable) {
-    this.excelDataTable.clear().destroy();
-    const dataTableElement = $('#dtPreview1');
-    if (dataTableElement.length) {
-      dataTableElement.empty();
-    }
-  }
-
-  // Initialize your DataTable with the Excel data and columns
-  this.initializeExcelDataTable2(this.excelData);
-  console.log(this.excelData)
-
-  Swal.close();
-}
-
-
-uploadStakeholder() {
-  const fileInput = document.getElementById('formFile1') as HTMLInputElement;
-
-  if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
-    console.error('No file selected');
-    return;
-  }
-
-  const file = fileInput.files[0];
-  const reader = new FileReader();
-  this.selectedFile=  file;
-  reader.onload = (e: ProgressEvent<FileReader>) => {
-    const arrayBuffer = e.target?.result as ArrayBuffer;
-
-    const data = new Uint8Array(arrayBuffer);
-    const workbook = XLSX.read(data, { type: 'array' });
-
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
-
-    // Convert sheet to JSON
-    const jsonData = XLSX.utils.sheet_to_json<any>(worksheet);
-
-    // Map rows to your model
-    this.participants =jsonData.map(row => {
-      const participant = new StakeholderParticipantModel();
-
-      participant.gtid =  `${this.generalActivity.id}`;
-      participant.nameOfParticipant = row['NameOfParticipant'] ?? '';
-      participant.sex = row['Sex'] ?? '';
-      participant.organisation = row['Organisation'] ?? '';
-      participant.position = row['Position'] ?? '';
-      participant.contactNumber = row['ContactNumber'] ?? '';
-      participant.emailAddress = row['EmailAddress'] ?? '';
-      participant.uploadedBy =  this.currentUser.userId;
-      participant.uploadedDate = new Date();
-
-      return participant;
-    });
-
-   console.log(this.participants);
-console.log(this.participants.length);
-console.log (this.currentUser)
-Swal.fire({
-  title: 'Uploading...',
-  text: 'Please wait while we process your file.',
-  allowOutsideClick: false,
-  didOpen: () => {
-    Swal.showLoading();
-  }
-});
-// 1️⃣ POST participants data first
-this.http
-  .post(
-    `${this.apiUrl}/GeneralActivityParticipant/stakeholdertemplate/save-data/${this.generalActivity.id}`,
-    this.participants // Angular sends this as JSON
-  )
-  .subscribe({
-    next: () => {
+  displayData() {
+    if (!this.excelData || this.excelData.length === 0) {
       Swal.fire({
-        icon: 'success',
-        title: 'Upload Successful',
-        text: 'Stakeholder data has been uploaded successfully.'
+        icon: 'info',
+        title: 'No Data',
+        text: 'No Excel data available to display.'
       });
-    },
-    error: err => {
-      console.error(err);
+      return;
+    }
+
+    Swal.fire({
+      title: 'Generating Preview...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    // Prepare columns dynamically based on keys from the first record
+    const columns: any[] = Object.keys(this.excelData[0]).map((key) => ({
+      data: key,
+      title: key,
+    }));
+
+    // Clear and destroy previous DataTable if exists
+    if (this.excelDataTable) {
+      this.excelDataTable.clear().destroy();
+      const dataTableElement = $('#dtPreview');
+      if (dataTableElement.length) {
+        dataTableElement.empty();
+      }
+    }
+
+    // Initialize your DataTable with the Excel data and columns
+    this.initializeExcelDataTable(this.excelData);
+
+    Swal.close();
+  }
+
+  displayData2() {
+    if (!this.excelData || this.excelData.length === 0) {
+      Swal.fire({
+        icon: 'info',
+        title: 'No Data',
+        text: 'No Excel data available to display.'
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: 'Generating Preview...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    // Prepare columns dynamically based on keys from the first record
+    const columns: any[] = Object.keys(this.excelData[0]).map((key) => ({
+      data: key,
+      title: key,
+    }));
+
+    // Clear and destroy previous DataTable if exists
+    if (this.excelDataTable) {
+      this.excelDataTable.clear().destroy();
+      const dataTableElement = $('#dtPreview1');
+      if (dataTableElement.length) {
+        dataTableElement.empty();
+      }
+    }
+
+    // Initialize your DataTable with the Excel data and columns
+    this.initializeExcelDataTable2(this.excelData);
+    console.log(this.excelData)
+
+    Swal.close();
+  }
+
+
+  uploadStakeholders() {
+
+    const formData = new FormData();
+
+    const fileInput = document.getElementById('formFile1') as HTMLInputElement;
+
+    const file = fileInput?.files?.[0];
+
+    if (!file) {
       Swal.fire({
         icon: 'error',
-        title: 'Data Upload Failed',
-        text: 'Unable to save participant data. Please check the JSON format.'
+        title: 'Upload Error',
+        text: 'Please select a file before uploading.',
       });
+      return;
     }
-  });
 
-// FileReader error handler
-reader.onerror = () => {
-  console.error('Error reading file');
-};
+    formData.append('file', file);
 
-// Start reading the file
-reader.readAsArrayBuffer(file);
-  }}
-
-submitData(): void {
-  if (!this.selectedFile) {
     Swal.fire({
-      icon: 'warning',
-      title: 'No File Selected',
-      text: 'Please select an Excel file before uploading.'
+      title: 'Uploading Stakeholders...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
     });
-    return;
-  }
 
-  // Show loading
-  Swal.fire({
-    title: 'Uploading...',
-    text: 'Please wait while we process your file.',
-    allowOutsideClick: false,
-    didOpen: () => {
-      Swal.showLoading();
-    }
-  });
+    this.http
+      .post<any>(
+        `${this.apiUrl}/GeneralActivityParticipant/UploadStakeholderTemplate/${this.generalActivity.id}`,
+        formData
+      )
+      .subscribe(
+        (response) => {
+          Swal.close();
 
-  const fd = new FormData();
-  fd.append('file', this.selectedFile);
-
-  this.http.post(
-   `${this.apiUrl}/GeneralActivityParticipant/upload-file/${this.generalActivity.id}/${this.stakeholder.uploadedBy}`,
-    fd
-  ).subscribe({
-    next: () => {
-      // Upload parsed data
-      this.http.post(
-       `${this.apiUrl}/GeneralActivityParticipant/stakeholdertemplate/save-data/${this.generalActivity.id}/${this.stakeholder.uploadedBy}`,
-        this.participants
-      ).subscribe({
-        next: () => {
+          // Show summary popup
           Swal.fire({
             icon: 'success',
-            title: 'Upload Successful',
-            text: 'Stakeholder data has been uploaded successfully.'
-          });
-        },
-        error: err => {
-          console.error(err);
-          Swal.fire({
-            icon: 'error',
-            title: 'Data Upload Failed',
-            text: 'File was uploaded but data saving failed.'
-          });
-        }
-      });
-    },
-    error: err => {
-      console.error(err);
-      Swal.fire({
-        icon: 'error',
-        title: 'File Upload Failed',
-        text: 'Unable to upload the Excel file. Please try again.'
-      });
-    }
-  });
-}
-
-UploadData() {
-  const formData = new FormData();
-
-  const fileInput = document.getElementById('formFile') as HTMLInputElement;
-  const file = fileInput?.files?.[0];
-
-  if (!file) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Upload Error',
-      text: 'Please select a file before uploading.',
-    });
-    return;
-  }
-
-  formData.append('file', file);
-
-  Swal.fire({
-    title: 'Uploading Participants...',
-    allowOutsideClick: false,
-    didOpen: () => {
-      Swal.showLoading();
-    },
-  });
-
-  this.http
-    .post<any>(
-      `${this.apiUrl}/GeneralActivityParticipant/UploadParticipantsTemplate/${this.generalActivity.id}`,
-      formData
-    )
-    .subscribe(
-      (response) => {
-        Swal.close();
-
-        // Show summary popup
-        Swal.fire({
-          icon: 'success',
-          title: 'Upload Complete',
-          html: `
+            title: 'Upload Complete',
+            html: `
             <p>${response.message}</p>
             <p><strong>Success:</strong> ${response.totalSuccess}</p>
             <p><strong>Failed:</strong> ${response.totalFailed}</p>
           `,
+          });
+
+          // Store response for results table
+          this.uploadStakeholdersResults = response;
+
+          // Initialize DataTable
+          this.loadResultsTable(response.results);
+        },
+        (error) => {
+          Swal.close();
+          Swal.fire({
+            icon: 'error',
+            title: 'Upload Failed',
+            text: error?.error || 'An error occurred during upload.',
+          });
+        }
+      );
+  }
+
+  submitData(): void {
+    if (!this.selectedFile) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'No File Selected',
+        text: 'Please select an Excel file before uploading.'
+      });
+      return;
+    }
+
+    // Show loading
+    Swal.fire({
+      title: 'Uploading...',
+      text: 'Please wait while we process your file.',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+
+    const fd = new FormData();
+    fd.append('file', this.selectedFile);
+
+    this.http.post(
+      `${this.apiUrl}/GeneralActivityParticipant/upload-file/${this.generalActivity.id}/${this.stakeholder.uploadedBy}`,
+      fd
+    ).subscribe({
+      next: () => {
+        // Upload parsed data
+        this.http.post(
+          `${this.apiUrl}/GeneralActivityParticipant/stakeholdertemplate/save-data/${this.generalActivity.id}/${this.stakeholder.uploadedBy}`,
+          this.participants
+        ).subscribe({
+          next: () => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Upload Successful',
+              text: 'Stakeholder data has been uploaded successfully.'
+            });
+          },
+          error: err => {
+            console.error(err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Data Upload Failed',
+              text: 'File was uploaded but data saving failed.'
+            });
+          }
         });
-
-        // Store response for results table
-        this.uploadResults = response;
-
-        // Initialize DataTable
-        this.loadResultsTable(response.results);
       },
-      (error) => {
-        Swal.close();
+      error: err => {
+        console.error(err);
         Swal.fire({
           icon: 'error',
-          title: 'Upload Failed',
-          text: error?.error || 'An error occurred during upload.',
+          title: 'File Upload Failed',
+          text: 'Unable to upload the Excel file. Please try again.'
         });
       }
-    );
-}
+    });
+  }
+
+  UploadData() {
+    const formData = new FormData();
+
+    const fileInput = document.getElementById('formFile') as HTMLInputElement;
+    const file = fileInput?.files?.[0];
+
+    if (!file) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Upload Error',
+        text: 'Please select a file before uploading.',
+      });
+      return;
+    }
+
+    formData.append('file', file);
+
+    Swal.fire({
+      title: 'Uploading Participants...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    this.http
+      .post<any>(
+        `${this.apiUrl}/GeneralActivityParticipant/UploadParticipantsTemplate/${this.generalActivity.id}`,
+        formData
+      )
+      .subscribe(
+        (response) => {
+          Swal.close();
+
+          // Show summary popup
+          Swal.fire({
+            icon: 'success',
+            title: 'Upload Complete',
+            html: `
+            <p>${response.message}</p>
+            <p><strong>Success:</strong> ${response.totalSuccess}</p>
+            <p><strong>Failed:</strong> ${response.totalFailed}</p>
+          `,
+          });
+
+          // Store response for results table
+          this.uploadResults = response;
+
+          // Initialize DataTable
+          this.loadResultsTable(response.results);
+        },
+        (error) => {
+          Swal.close();
+          Swal.fire({
+            icon: 'error',
+            title: 'Upload Failed',
+            text: error?.error || 'An error occurred during upload.',
+          });
+        }
+      );
+  }
 
 
   saveParticipant(): void {
@@ -673,7 +655,7 @@ UploadData() {
   }
 
 
-    private initializeExcelDataTable2(data: any[]) {
+  private initializeExcelDataTable2(data: any[]) {
     if (!data || data.length === 0) {
       console.error('No data available.');
       return;
@@ -852,16 +834,33 @@ UploadData() {
       });
     }
   }
+
   getitem() {
     this.http.get(`${this.apiUrl}/GeneralActivity/${this.editid}`).subscribe(
       (response: any) => {
-        this.generalActivity = response;
+        // Convert dates to YYYY-MM-DD
+        const formatToYMD = (dateStr: string) => {
+          const date = new Date(dateStr);
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, '0');
+          return `${year}-${month}-${day}`;
+        };
+
+        this.generalActivity = {
+          ...response,
+          startDate: formatToYMD(response.startDate),
+          endDate: formatToYMD(response.endDate)
+        };
+
+        console.log("Activity details:", this.generalActivity);
       },
       (error) => {
         console.error('Error occurred:', error);
       }
     );
   }
+
   ngOnInit(): void {
     var data = localStorage.getItem('currentUser');
     this.currentUser = data ? JSON.parse(data) : null;
@@ -941,7 +940,7 @@ UploadData() {
       projectId: 1,
       organisationId: 0,
       subComponentId: 0,
-      subActivityId:0,
+      subActivityId: 0,
       interventionId: 0,
       activityTypeId: 0,
       activityId: 0,
@@ -975,6 +974,8 @@ UploadData() {
     }
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    console.log("Activity to update:", this.generalActivity);
 
     this.http
       .put<any>(

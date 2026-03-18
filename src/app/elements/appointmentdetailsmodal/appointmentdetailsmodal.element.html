@@ -75,8 +75,6 @@
                     </a>
                   </li>
 
-
-
                   <li *ngIf="generalActivity.id > 0" class="nav-item">
                     <a
                       class="nav-link mb-0 px-0 py-1"
@@ -89,8 +87,6 @@
                       Stakeholder Upload
                     </a>
                   </li>
-
-
 
                   <li *ngIf="generalActivity.id > 0" class="nav-item">
                     <a
@@ -658,7 +654,7 @@
                 </div>
               </div>
 
-      <div
+              <div
                 class="tab-pane fade"
                 id="stakeholderupload"
                 role="tabpanel"
@@ -667,7 +663,9 @@
                 <div class="card-body mt-0">
                   <div class="row mb-2">
                     <div class="col-12 col-sm-6">
-                      <label for="formFile" class="form-label">Upload Stakeholder</label>
+                      <label for="formFile" class="form-label"
+                        >Upload Stakeholder</label
+                      >
                       <input
                         class="form-control"
                         type="file"
@@ -706,7 +704,7 @@
                         *ngIf="currentUser.permissions.includes('SelectParticipants')"
                         type="button"
                         class="btn bg-gradient-primary"
-                        (click)="uploadStakeholder()"
+                        (click)="uploadStakeholders()"
                       >
                         Save Data
                       </button>
@@ -714,7 +712,6 @@
                   </div>
                 </div>
               </div>
-
 
               <div
                 class="tab-pane fade"
