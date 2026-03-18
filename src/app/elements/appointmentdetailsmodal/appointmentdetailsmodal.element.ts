@@ -375,11 +375,8 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
 
 
   uploadStakeholders() {
-
     const formData = new FormData();
-
     const fileInput = document.getElementById('formFile1') as HTMLInputElement;
-
     const file = fileInput?.files?.[0];
 
     if (!file) {
@@ -396,9 +393,7 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     Swal.fire({
       title: 'Uploading Stakeholders...',
       allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      },
+      didOpen: () => Swal.showLoading(),
     });
 
     this.http
@@ -410,7 +405,6 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
         (response) => {
           Swal.close();
 
-          // Show summary popup
           Swal.fire({
             icon: 'success',
             title: 'Upload Complete',
@@ -421,10 +415,8 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
           `,
           });
 
-          // Store response for results table
           this.uploadStakeholdersResults = response;
 
-          // Initialize DataTable
           this.loadResultsTable(response.results);
         },
         (error) => {
@@ -501,7 +493,6 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
 
   UploadData() {
     const formData = new FormData();
-
     const fileInput = document.getElementById('formFile') as HTMLInputElement;
     const file = fileInput?.files?.[0];
 
@@ -519,9 +510,7 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     Swal.fire({
       title: 'Uploading Participants...',
       allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      },
+      didOpen: () => Swal.showLoading(),
     });
 
     this.http
@@ -533,7 +522,6 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
         (response) => {
           Swal.close();
 
-          // Show summary popup
           Swal.fire({
             icon: 'success',
             title: 'Upload Complete',
@@ -544,10 +532,8 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
           `,
           });
 
-          // Store response for results table
           this.uploadResults = response;
 
-          // Initialize DataTable
           this.loadResultsTable(response.results);
         },
         (error) => {
@@ -560,7 +546,6 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
         }
       );
   }
-
 
   saveParticipant(): void {
     console.log(this.participant);
@@ -614,10 +599,18 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       console.error('No data available.');
       return;
     }
-    var columns: any[] = Object.keys(this.excelData[0]).map((key) => ({
+
+    // Clear previous DataTable if it exists
+    if ($.fn.DataTable.isDataTable('#dtResults')) {
+      $('#dtResults').DataTable().clear().destroy();
+    }
+
+    // Build columns based on the actual data
+    const columns: any[] = Object.keys(data[0]).map((key) => ({
       data: key,
       title: key,
     }));
+
     const dtOptions: any = {
       processing: true,
       pagingType: 'full_numbers',
@@ -628,30 +621,32 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       buttons: ['copy', 'print', 'excel', 'colvis'],
       initComplete: function (this: any) {
         const api = this.api();
-
         const headerRow = api.table().header().querySelector('tr');
         const searchRow = document.createElement('tr');
+
         api.columns().every(function (this: any) {
           const column = this;
           const searchCell = document.createElement('th');
           const input = document.createElement('input');
+
           input.placeholder = 'Search';
           input.className = 'form-control form-control-sm';
+
           input.addEventListener('keyup', function () {
             column.search(this.value).draw();
           });
+
           searchCell.appendChild(input);
           searchRow.appendChild(searchCell);
         });
+
         headerRow.insertAdjacentElement('afterend', searchRow);
       },
     };
 
     this.excelDataTable = $('#dtResults').DataTable(dtOptions);
 
-    if (data && data.length > 0) {
-      this.excelDataTable.rows.add(data).draw();
-    }
+    this.excelDataTable.rows.add(data).draw();
   }
 
 
