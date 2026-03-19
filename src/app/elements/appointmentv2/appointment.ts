@@ -837,10 +837,6 @@ export class AppointmentElement implements OnInit, OnChanges {
   }
 
 
-
-
-
-
     // SHOW PREVIEW TABLE
   displayData2() {
     if (!this.excelData.length) {

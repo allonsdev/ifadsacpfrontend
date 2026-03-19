@@ -112,8 +112,6 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       pwdTin: '',
       hhGender: '',
       contactNumber: '',
-
-
     };
 
   @Output() refresh: EventEmitter<any> = new EventEmitter();
@@ -863,6 +861,7 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     this.loadActivities();
     // Set default projectId after modal is loaded
     this.generalActivity.projectId = 1;
+    
   }
 
   refreshdata() {
