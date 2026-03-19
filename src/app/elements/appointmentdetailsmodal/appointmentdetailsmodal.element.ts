@@ -166,6 +166,7 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.resetUploadSection(); // add this
     if (this.editid != 0) {
       this.getitem();
       this.getRegister();
@@ -190,8 +191,6 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     };
   }
 
-
-
   loadActivities(): void {
     console.log("hieeeeeee")
     const selectedSubCompId = +this.generalActivity.subComponentId!;
@@ -209,9 +208,6 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     console.log("Selected aCTIVITT:", currentActivityId);
 
   }
-
-
-
 
   onSubComponentSelect(event: any) {
     const selectedId = Number(event.target.value);
@@ -245,7 +241,7 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       return;
     }
 
-    var file = event.target.files[0];
+    const file = event.target.files[0];
     const fileReader = new FileReader();
 
     fileReader.onload = (e) => {
@@ -254,25 +250,17 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       const sheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[sheetName];
 
-      const headers = [];
-      for (let col = 0; ; col++) {
+      // Get the sheet range to know how many columns exist
+      const range = XLSX.utils.decode_range(worksheet['!ref']!);
+
+      // Read headers from row 0 (the actual header row in the sheet)
+      const headers: string[] = [];
+      for (let col = range.s.c; col <= range.e.c; col++) {
         const cellAddress = XLSX.utils.encode_cell({ r: 0, c: col });
-        if (!worksheet[cellAddress]) {
-          break;
-        }
-
-        const headerValue = worksheet[cellAddress].v;
-        if (
-          headerValue === undefined ||
-          headerValue === null ||
-          headerValue === ''
-        ) {
-          break;
-        }
-
-        headers.push(
-          headerValue.charAt(0).toLowerCase() + headerValue.slice(1)
-        );
+        const cell = worksheet[cellAddress];
+        const headerValue = cell ? String(cell.v).trim() : `Column${col + 1}`;
+        // camelCase the first letter to match your existing convention
+        headers.push(headerValue.charAt(0).toLowerCase() + headerValue.slice(1));
       }
 
       if (headers.length === 0) {
@@ -280,16 +268,61 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
         return;
       }
 
-      const startingRow = 1;
+      // Start from row 1 (skip header row), defval: null ensures missing cells aren't dropped
       this.excelData = XLSX.utils.sheet_to_json(worksheet, {
         header: headers,
-        range: startingRow,
-        dateNF: 'yyyy-mm-dd', // Specify the date format here
+        range: 1,
+        defval: null,         // <-- key fix: missing cells become null instead of being omitted
+        dateNF: 'yyyy-mm-dd',
       });
+
       console.log('Excel File Data', this.excelData);
     };
 
     fileReader.readAsArrayBuffer(file);
+  }
+
+  resetUploadSection(): void {
+    // Clear excel data
+    this.excelData = [];
+    this.stakeholder.uploadResults = null;
+
+    // Destroy and clear both preview DataTables
+    if ($.fn.DataTable.isDataTable('#dtPreview')) {
+      $('#dtPreview').DataTable().clear().destroy();
+      $('#dtPreview').empty();
+    }
+
+    if ($.fn.DataTable.isDataTable('#dtPreview1')) {
+      $('#dtPreview1').DataTable().clear().destroy();
+      $('#dtPreview1').empty();
+    }
+
+    // Destroy and clear results DataTable
+    if ($.fn.DataTable.isDataTable('#dtResults')) {
+      $('#dtResults').DataTable().clear().destroy();
+      $('#dtResults').empty();
+    }
+
+    // Reset file inputs
+    const fileInput1 = document.getElementById('formFile') as HTMLInputElement;
+    if (fileInput1) fileInput1.value = '';
+
+    const fileInput2 = document.getElementById('formFile1') as HTMLInputElement;
+    if (fileInput2) fileInput2.value = '';
+
+    // Reset file references
+    this.file = null;
+    this.selectedFile = null;
+
+    setTimeout(() => {
+      // Switch the tab link
+      $('a[href="#generalactivitydetails"]').tab('show');
+
+      // Force the pane visibility
+      $('.tab-pane').removeClass('show active');
+      $('#generalactivitydetails').addClass('show active');
+    }, 100);
   }
 
   displayData() {
@@ -861,7 +894,7 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     this.loadActivities();
     // Set default projectId after modal is loaded
     this.generalActivity.projectId = 1;
-    
+
   }
 
   refreshdata() {
@@ -891,8 +924,12 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       )
       .subscribe(
         (response) => {
+          this.generalActivity = {
+            ...this.generalActivity,
+            id: response.id  // keeps all form values, just adds the id
+          };
+          this.cdRef.detectChanges(); // force Angular to see the id change
           this.refreshdata();
-          this.clearForm();
           Swal.fire({
             icon: 'success',
             title: 'GeneralActivity',
