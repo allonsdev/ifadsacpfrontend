@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */ /* Allow text wrapping in sidenav nav links */
+.sidenav .nav-link,
+.sidenav .nav-link-text,
+.sidenav .sidenav-normal {
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+}
+
+/* Ensure the nav items expand to fit wrapped content */
+.sidenav .nav-item {
+  height: auto !important;
+}
+
+/* Keep icon aligned to top when text wraps */
+.sidenav .nav-link {
+  align-items: flex-start !important;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.sidenav .icon-shape {
+  margin-top: 2px; /* nudge icon to align with first line of text */
+  flex-shrink: 0;
+}
