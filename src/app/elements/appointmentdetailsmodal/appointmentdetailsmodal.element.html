@@ -298,6 +298,8 @@
                       name="startDate"
                       [(ngModel)]="generalActivity.startDate"
                       (change)="updateEndDateMin()"
+                      min="2021-01-01"
+                      max="2030-12-31"
                     />
                   </div>
                   <div class="col-12 col-sm-6 mt-3 mt-sm-0">
@@ -310,6 +312,8 @@
                       [(ngModel)]="generalActivity.endDate"
                       [min]="minEndDate"
                       [disabled]="!generalActivity.startDate"
+                      min="2021-01-01"
+                      max="2030-12-31"
                     />
                   </div>
                 </div>
