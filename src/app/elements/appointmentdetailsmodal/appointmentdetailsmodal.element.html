@@ -34,7 +34,7 @@
                       aria-controls="generalactivitydetails"
                       aria-selected="true"
                     >
-                      General Activity Details
+                      Activity Details
                     </a>
                   </li>
                   <li *ngIf="generalActivity.id > 0" class="nav-item">
@@ -59,7 +59,7 @@
                       aria-controls="participantcapture"
                       aria-selected="false"
                     >
-                      Participant Capture
+                      Participants Capture
                     </a>
                   </li>
                   <li *ngIf="generalActivity.id > 0" class="nav-item">
@@ -71,7 +71,7 @@
                       aria-controls="fileupload"
                       aria-selected="false"
                     >
-                      Excel Upload
+                      Participants Upload
                     </a>
                   </li>
 
@@ -260,9 +260,11 @@
                   </div>
                   <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                     <label for="otherfacilitators">Other Facilitators</label>
+
+                    <!-- Hidden multi-select: keeps existing binding, auto-selects admin -->
                     <select
                       multiple
-                      class="form-control"
+                      class="form-control d-none"
                       id="otherfacilitators"
                       name="otherFacilitatorIds"
                       [(ngModel)]="otherFacilitatorIds"
@@ -274,6 +276,16 @@
                         {{item.staffFullName}}
                       </option>
                     </select>
+
+                    <!-- NEW: free text textarea -->
+                    <textarea
+                      class="form-control"
+                      id="otherFacilitatorsText"
+                      name="otherFacilitatorsText"
+                      [(ngModel)]="generalActivity.otherFacilitatorsText"
+                      rows="3"
+                      placeholder="Enter other facilitator names..."
+                    ></textarea>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -602,7 +614,7 @@
                         class="btn bg-gradient-primary"
                         (click)="displayData()"
                       >
-                        Preview
+                        Preview Data
                       </button>
                     </div>
                   </div>
@@ -627,7 +639,7 @@
                         class="btn bg-gradient-primary"
                         (click)="UploadData()"
                       >
-                        Save
+                        Save Data
                       </button>
                     </div>
                   </div>
@@ -666,12 +678,13 @@
               >
                 <div class="card-body mt-0">
                   <div class="row mb-2">
-                    <div class="col-12 col-sm-6">
-                      <label for="formFile" class="form-label"
+                    <!-- File input -->
+                    <div class="col-12 col-sm-6 d-flex flex-column">
+                      <label for="formFile1" class="form-label"
                         >Upload Stakeholder</label
                       >
                       <input
-                        class="form-control"
+                        class="form-control mt-auto"
                         type="file"
                         id="formFile1"
                         [(ngModel)]="file"
@@ -679,7 +692,9 @@
                         (change)="readExcelFile($event)"
                       />
                     </div>
-                    <div class="col-12 col-sm-6">
+
+                    <!-- Button -->
+                    <div class="col-12 col-sm-6 d-flex align-items-end">
                       <button
                         type="button"
                         class="btn bg-gradient-primary"

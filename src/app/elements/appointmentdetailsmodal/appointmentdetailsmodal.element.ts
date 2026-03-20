@@ -40,6 +40,7 @@ export class GeneralActivity {
   updatedBy: string = '';
   updatedDate: Date = new Date();
   subActivityId: number = 0;
+  otherFacilitatorsText: string | null = null;
 }
 export class StakeholderParticipantModel {
   gtid: string;
@@ -1011,6 +1012,7 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       createdDate: new Date(),
       updatedBy: '',
       updatedDate: new Date(),
+      otherFacilitatorsText: null,
     };
   }
 
@@ -1151,10 +1153,16 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     this.http.get(`${this.apiUrl}/StaffMember`).subscribe(
       (response: any) => {
         this.facilitators = response;
+
+        // Auto-select the admin facilitator in the hidden multi-select
+        const admin = this.facilitators.find(
+          (f: any) => f.staffFullName?.toLowerCase().includes('admin')
+        );
+        if (admin && !this.otherFacilitatorIds.includes(admin.id)) {
+          this.otherFacilitatorIds = [...this.otherFacilitatorIds, admin.id];
+        }
       },
-      (error) => {
-        console.error('Error occurred:', error);
-      }
+      (error) => { console.error('Error occurred:', error); }
     );
     this.http.get(`${this.apiUrl}/IrrigationScheme`).subscribe(
       (response: any) => {
