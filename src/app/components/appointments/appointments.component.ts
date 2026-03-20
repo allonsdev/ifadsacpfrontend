@@ -34,7 +34,7 @@ export class AppointmentsComponent implements OnInit {
   data: any;
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private apiUrl = apiUrl;
 
@@ -42,38 +42,30 @@ export class AppointmentsComponent implements OnInit {
     var data = localStorage.getItem('currentUser');
     this.currentUser = data ? JSON.parse(data) : null;
     this.getRegister();
-  
+
   }
 
 
 
 
   filter(): void {
-    console.log('GG');
+    if (!this.startDate || !this.endDate) return;
 
-    // Checking if both start and end dates are provided
-    if (!this.startDate || !this.endDate) {
-      return;
-    }
-    console.log('G2');
+    const rangeStart = new Date(this.startDate);
+    const rangeEnd = new Date(this.endDate);
 
-    // Converting start and end dates to Date objects
-    const startDate = new Date(this.startDate);
-    const endDate = new Date(this.endDate);
-
-    // Filtering activities by end date within the specified date range
     const filteredData = this.data.filter((activity: any) => {
-      // Converting activity's end date to a Date object
+      const activityStartDate = new Date(activity.StartDate);
       const activityEndDate = new Date(activity.EndDate);
 
-      // Comparing activity's end date with the specified date range
-      console.log(startDate, activity.EndDate, endDate, activityEndDate);
-      return activityEndDate >= startDate && activityEndDate <= endDate;
+      return activityStartDate >= rangeStart
+        && activityStartDate <= rangeEnd
+        && activityEndDate >= rangeStart
+        && activityEndDate <= rangeEnd;
     });
 
-    console.log(filteredData);
+    console.log('Filtered Data:', filteredData);
 
-    // Clearing existing rows in the datatable and adding filtered rows
     this.dataTable.clear().rows.add(filteredData).draw();
   }
 
@@ -115,129 +107,129 @@ export class AppointmentsComponent implements OnInit {
       data: key,
       title: key,
     }));
-const actionButtons = [
-  // EDIT BUTTON
-  {
-    data: 'action',
-    defaultContent:
-      '<button class="btn btn-sm btn-icon-only btn-outline-secondary mb-0 d-flex align-items-center justify-content-center px-3" data-bs-toggle="modal" data-bs-target="#appointmentdetailsmodal"><i class="fa fa-pencil"></i></button>',
-    title: '',
-    createdCell: (
-      cell: any,
-      cellData: any,
-      rowData: any,
-      rowIndex: number,
-      colIndex: number
-    ) => {
-      $(cell).on('click', () => {
-        this.getFacilitators(rowData.Id);
-        this.editObject = rowData.Id;
-        console.log(rowData.Id, rowData);
-      });
-    },
-  },
+    const actionButtons = [
+      // EDIT BUTTON
+      {
+        data: 'action',
+        defaultContent:
+          '<button class="btn btn-sm btn-icon-only btn-outline-secondary mb-0 d-flex align-items-center justify-content-center px-3" data-bs-toggle="modal" data-bs-target="#appointmentdetailsmodal"><i class="fa fa-pencil"></i></button>',
+        title: '',
+        createdCell: (
+          cell: any,
+          cellData: any,
+          rowData: any,
+          rowIndex: number,
+          colIndex: number
+        ) => {
+          $(cell).on('click', () => {
+            this.getFacilitators(rowData.Id);
+            this.editObject = rowData.Id;
+            console.log(rowData.Id, rowData);
+          });
+        },
+      },
 
-  // DOWNLOAD BUTTON
-  {
-    data: 'action',
-    title: '',
-    defaultContent:
-      '<button class="btn btn-sm btn-success d-flex align-items-center justify-content-center px-3"><i class="fa fa-download"></i></button>',
-    createdCell: (
-      cell: any,
-      cellData: any,
-      rowData: any,
-      rowIndex: number,
-      colIndex: number
-    ) => {
-      $(cell).on('click', () => {
-        const url =
-          apiUrl + '/GeneralActivity/DownloadParticipants/' + rowData.Id;
+      // DOWNLOAD BUTTON
+      {
+        data: 'action',
+        title: '',
+        defaultContent:
+          '<button class="btn btn-sm btn-success d-flex align-items-center justify-content-center px-3"><i class="fa fa-download"></i></button>',
+        createdCell: (
+          cell: any,
+          cellData: any,
+          rowData: any,
+          rowIndex: number,
+          colIndex: number
+        ) => {
+          $(cell).on('click', () => {
+            const url =
+              apiUrl + '/GeneralActivity/DownloadParticipants/' + rowData.Id;
 
-        this.http.get(url, { responseType: 'blob' }).subscribe(
-          (response: Blob) => {
-            const blob = new Blob([response], {
-              type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            });
+            this.http.get(url, { responseType: 'blob' }).subscribe(
+              (response: Blob) => {
+                const blob = new Blob([response], {
+                  type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                });
 
-            const downloadUrl = window.URL.createObjectURL(blob);
+                const downloadUrl = window.URL.createObjectURL(blob);
 
-            const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.download = 'Participants_' + rowData.Id + '.xlsx';
-            link.click();
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = 'Participants_' + rowData.Id + '.xlsx';
+                link.click();
 
-            window.URL.revokeObjectURL(downloadUrl);
+                window.URL.revokeObjectURL(downloadUrl);
 
-            Swal.fire({
-              icon: 'success',
-              title: 'Participants',
-              text: 'Excel download started successfully',
-            });
-          },
-          () => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Participants',
-              text: 'Error downloading Excel file',
-            });
-          }
-        );
-      });
-    },
-  },
-
-  // DELETE BUTTON
-  {
-    data: 'action',
-    title: '',
-    defaultContent:
-      '<button class="btn btn-sm btn-danger d-flex align-items-center justify-content-center px-3"><i class="fa fa-trash"></i></button>',
-    createdCell: (
-      cell: any,
-      cellData: any,
-      rowData: any,
-      rowIndex: number,
-      colIndex: number
-    ) => {
-      $(cell).on('click', () => {
-        Swal.fire({
-          title: 'Are you sure?',
-          text: 'This record will be permanently deleted!',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#d33',
-          cancelButtonColor: '#3085d6',
-          confirmButtonText: 'Yes, delete it!',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            const url = apiUrl + '/GeneralActivity/' + rowData.Id;
-
-            this.http.delete(url).subscribe(
-              () => {
-                Swal.fire(
-                  'Deleted!',
-                  'The record has been deleted.',
-                  'success'
-                );
-
-                // remove row from table
-                this.dataTable.row($(cell).parents('tr')).remove().draw();
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Participants',
+                  text: 'Excel download started successfully',
+                });
               },
               () => {
-                Swal.fire(
-                  'Error!',
-                  'Something went wrong while deleting.',
-                  'error'
-                );
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Participants',
+                  text: 'Error downloading Excel file',
+                });
               }
             );
-          }
-        });
-      });
-    },
-  },
-];
+          });
+        },
+      },
+
+      // DELETE BUTTON
+      {
+        data: 'action',
+        title: '',
+        defaultContent:
+          '<button class="btn btn-sm btn-danger d-flex align-items-center justify-content-center px-3"><i class="fa fa-trash"></i></button>',
+        createdCell: (
+          cell: any,
+          cellData: any,
+          rowData: any,
+          rowIndex: number,
+          colIndex: number
+        ) => {
+          $(cell).on('click', () => {
+            Swal.fire({
+              title: 'Are you sure?',
+              text: 'This record will be permanently deleted!',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#3085d6',
+              confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                const url = apiUrl + '/GeneralActivity/' + rowData.Id;
+
+                this.http.delete(url).subscribe(
+                  () => {
+                    Swal.fire(
+                      'Deleted!',
+                      'The record has been deleted.',
+                      'success'
+                    );
+
+                    // remove row from table
+                    this.dataTable.row($(cell).parents('tr')).remove().draw();
+                  },
+                  () => {
+                    Swal.fire(
+                      'Error!',
+                      'Something went wrong while deleting.',
+                      'error'
+                    );
+                  }
+                );
+              }
+            });
+          });
+        },
+      },
+    ];
 
     // Ensure action buttons come FIRST
     const updatedColumns = [...actionButtons, ...columns];

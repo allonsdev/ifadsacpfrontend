@@ -902,12 +902,14 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
   }
 
   createGeneralActivity(): void {
+
     if (!this.isGeneralActivityValid()) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Validation Error',
-        text: 'Please fill in all required fields.',
-      });
+      Swal.fire({ icon: 'error', title: 'Validation Error', text: 'Please fill in all required fields.' });
+      return;
+    }
+
+    if (!this.isDateRangeValid()) {
+      Swal.fire({ icon: 'error', title: 'Invalid Date Range', text: 'End date cannot be before start date.' });
       return;
     }
 
@@ -946,9 +948,27 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       );
   }
 
+  isDateRangeValid(): boolean {
+    const start = new Date(this.generalActivity.startDate);
+    const end = new Date(this.generalActivity.endDate);
+    return end >= start;
+  }
+
   isGeneralActivityValid(): boolean {
     if (this.generalActivity.projectId !== 1) {
       this.generalActivity.projectId = 1;
+    }
+    if (this.generalActivity.startDate && this.generalActivity.endDate) {
+      const start = new Date(this.generalActivity.startDate);
+      const end = new Date(this.generalActivity.endDate);
+      if (end < start) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Date Range',
+          text: 'End date cannot be before start date.',
+        });
+        return false;
+      }
     }
     return (
       this.generalActivity.projectId !== 0 &&
