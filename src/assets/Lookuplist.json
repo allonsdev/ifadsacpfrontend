@@ -79,7 +79,7 @@
   {
     "ListName": "Districts",
     "ListDescription": "List of Districts",
-    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luDistricts]",
+    "SelectQuery": "SELECT [Id],[Name],[ProvinceId] FROM [dbo].[luDistricts]",
     "TableName": "luDistricts",
     "PrimaryKey": "Id"
   },
@@ -170,7 +170,7 @@
   {
     "ListName": "Provinces",
     "ListDescription": "List of Provinces",
-    "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luProvinces]",
+    "SelectQuery": "SELECT [Id],[Name],[CountryId] FROM [dbo].[luProvinces]",
     "TableName": "luProvinces",
     "PrimaryKey": "Id"
   },
