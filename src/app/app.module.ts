@@ -99,6 +99,11 @@ import { RoadUsersDuplicatesComponent } from './components/duplicates/road-users
 import { IrrigationSchemesDuplicatesComponent } from './components/duplicates/irrigation-schemes-duplicates/irrigation-schemes-duplicates.component';
 import { VbusDuplicatesComponent } from './components/duplicates/vbus-duplicates/vbus-duplicates.component';
 
+import { WaterUsersComponent } from './components/wateruser/wateruser';
+import { RoadUsersComponent } from './components/roadusers/roaduser';
+import { SBUComponent } from './components/sbu/sbu';
+import { EmploymentComponent } from './components/employee/employee';
+
 
 @NgModule({
   declarations: [
@@ -183,6 +188,10 @@ import { VbusDuplicatesComponent } from './components/duplicates/vbus-duplicates
     RoadUsersDuplicatesComponent,
     IrrigationSchemesDuplicatesComponent,
     VbusDuplicatesComponent,
+    WaterUsersComponent,
+    RoadUsersComponent,
+    SBUComponent,
+    EmploymentComponent
   ],
   imports: [
     BrowserModule,

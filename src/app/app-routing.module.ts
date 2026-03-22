@@ -62,6 +62,11 @@ import { SchoolBusinessUnitsDuplicatesComponent } from './components/duplicates/
 import { VbusDuplicatesComponent } from './components/duplicates/vbus-duplicates/vbus-duplicates.component';
 import { WaterUsersDuplicatesComponent } from './components/duplicates/water-users-duplicates/water-users-duplicates.component';
 
+import { WaterUsersComponent } from './components/wateruser/wateruser';
+import { RoadUsersComponent } from './components/roadusers/roaduser';
+import { SBUComponent } from './components/sbu/sbu';
+import { EmploymentComponent } from './components/employee/employee';
+
 const routes: Routes = [
   {
     path: 'home',
@@ -90,7 +95,26 @@ const routes: Routes = [
         component: IndividualvbusComponent,
         canActivate: [authGuard],
       },
-
+      {
+  path: 'waterusers',
+  component: WaterUsersComponent,
+  canActivate: [authGuard],
+},
+{
+  path: 'roadusers',
+  component: RoadUsersComponent,
+  canActivate: [authGuard],
+},
+{
+  path: 'sbu',
+  component: SBUComponent,
+  canActivate: [authGuard],
+},
+{
+  path: 'employment',
+  component: EmploymentComponent,
+  canActivate: [authGuard],
+},
       {
         path: 'individualmse',
         component: IndividualmseComponent,

@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <!-- Upload Section -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Upload Employment Records Excel File</h5>
+        </div>
+
+        <div class="row m-3">
+          <div class="col-12">
+            <label for="fileInput">Upload Excel File</label>
+            <input
+              type="file"
+              id="fileInput"
+              (change)="onFileChange($event)"
+              accept=".xlsx, .xls"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12">
+            <button
+              type="button"
+              class="btn bg-gradient-primary mb-3 mt-3"
+              (click)="sendSelectedData()"
+            >
+              Upload and Process
+            </button>
+          </div>
+        </div>
+
+        <!-- Failed Records Table -->
+        <div class="card-body mt-0" *ngIf="failedRecords.length > 0">
+          <div class="table-responsive">
+            <table
+              class="table table-striped table-bordered table-sm row-border hover"
+              width="100%"
+              id="dtFailedRecords"
+            >
+              <thead>
+                <tr>
+                  <th>Row Number</th>
+                  <th>District</th>
+                  <th>Gender</th>
+                  <th>Age Group</th>
+                  <th>Disability Status</th>
+                  <th>Error Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let record of failedRecords; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ record.district }}</td>
+                  <td>{{ record.gender }}</td>
+                  <td>{{ record.ageGroup }}</td>
+                  <td>{{ record.disabilityStatus }}</td>
+                  <td>{{ record.errorMessage }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- All Employment Records -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">All Employment Records</h5>
+        </div>
+        <div class="card-body mt-0">
+          <div class="table-responsive">
+             <table class="table table-striped table-bordered table-sm row-border hover" width="100%"
+                  id="dtBeneficiaries">
+                </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      <footer class="footer pt-3"></footer>
+</div>
