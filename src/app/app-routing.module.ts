@@ -105,20 +105,20 @@ const routes: Routes = [
         canActivate: [authGuard],
       },
 
-        {
+      {
         path: 'mseupload',
         component: Mse,
         canActivate: [authGuard],
       },
-         {
+      {
         path: 'matrix',
         component: Matrix,
         canActivate: [authGuard],
       },
 
-        {
+      {
         path: 'vbus',
-        component:Vbu,
+        component: Vbu,
         canActivate: [authGuard],
       },
       {
@@ -294,4 +294,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

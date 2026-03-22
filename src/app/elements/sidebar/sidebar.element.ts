@@ -1,19 +1,16 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import Swal from 'sweetalert2';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-const apiUrl = environment.apiUrl;
 @Component({
   selector: 'sidebar',
   templateUrl: './sidebar.element.html'
 })
 export class SidebarElement implements OnInit {
 
-  menuItems: any[] = []; // Replace 'any[]' with your specific menu item type
+  menuItems: any[] = [];
   currentUser: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     var data = localStorage.getItem('currentUser');
@@ -38,5 +35,16 @@ export class SidebarElement implements OnInit {
   getChildItems(menuItem: any): any[] {
     return this.menuItems.filter(item => item.parentId === menuItem.id);
   }
-}
 
+  isMenuItemActive(menuItem: any): boolean {
+    const currentUrl = this.router.url.split('?')[0]; // strip query params
+    const children = this.getChildItems(menuItem);
+    return children.some(child => {
+      if (this.isParent(child)) {
+        return this.isMenuItemActive(child);
+      }
+      // ✅ Use exact string match instead of router.isActive()
+      return child.url && currentUrl === child.url;
+    });
+  }
+}

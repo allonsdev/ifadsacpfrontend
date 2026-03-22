@@ -1,6 +1,7 @@
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
+<div class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start mx-4" id="sidenav-main">
   <div class="sidenav-header">
-    <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+    <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+      aria-hidden="true" id="iconSidenav"></i>
     <a class="navbar-brand m-0" routerLink="/home/">
       <img src="assets/img/SACPCropped.jpg" class="navbar-brand-img h-100" alt="main_logo">
       <span class="ms-1 font-weight-bold">SACP</span>
@@ -9,50 +10,78 @@
 
   <hr class="horizontal dark mt-0">
 
-  <div class=" navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
+  <div class="navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <ng-container *ngFor="let menuItem of menuItems">
-
         <li class="nav-item" *ngIf="!menuItem.parentId">
           <ng-container *ngIf="!isParent(menuItem); else parentMenu">
-            <a *ngIf="!isExternalLink(menuItem.url)" class="nav-link" [routerLink]="menuItem.url" routerLinkActive="active">
-              <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center"></div>
+
+            <a *ngIf="!isExternalLink(menuItem.url)"
+              class="nav-link m-1"
+              [routerLink]="menuItem.url"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
               <span class="nav-link-text ms-1">{{ menuItem.name }}</span>
             </a>
-            <a *ngIf="isExternalLink(menuItem.url)" class="nav-link" [href]="menuItem.url" target="_blank" rel="noopener noreferrer">
-              <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center"></div>
+
+            <a *ngIf="isExternalLink(menuItem.url)"
+              class="nav-link m-1"
+              [href]="menuItem.url"
+              target="_blank"
+              rel="noopener noreferrer">
               <span class="nav-link-text ms-1">{{ menuItem.name }}</span>
             </a>
+
           </ng-container>
 
           <ng-template #parentMenu>
-            <a data-bs-toggle="collapse" [href]="'#' + menuItem.uid" class="nav-link"
-              [attr.aria-controls]="menuItem.uid" role="button" aria-expanded="false" routerLinkActive="active">
-              <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center"></div>
+            <!-- ✅ No routerLinkActive here — use manual [class.active] instead -->
+            <a data-bs-toggle="collapse"
+              [href]="'#' + menuItem.uid"
+              class="nav-link m-1"
+              [attr.aria-controls]="menuItem.uid"
+              role="button"
+              [attr.aria-expanded]="isMenuItemActive(menuItem)"
+              [class.active]="isMenuItemActive(menuItem)">
               <span class="nav-link-text ms-1">{{ menuItem.name }}</span>
             </a>
 
-            <div [id]="menuItem.uid" class="collapse">
+            <div [id]="menuItem.uid" class="collapse" [class.show]="isMenuItemActive(menuItem)">
               <ul class="nav ms-4">
                 <li class="nav-item" *ngFor="let childItem of getChildItems(menuItem)">
                   <ng-container *ngIf="!isParent(childItem); else subParentMenu">
-                    <a class="nav-link" [routerLink]="childItem.url" routerLinkActive="active">
+
+                    <a class="nav-link mx-0"
+                      [routerLink]="childItem.url"
+                      routerLinkActive="active"
+                      (click)="$event.stopPropagation()">
                       <span class="sidenav-mini-icon">{{ childItem.name.charAt(0) }}</span>
                       <span class="sidenav-normal">{{ childItem.name }}</span>
                     </a>
+
                   </ng-container>
 
                   <ng-template #subParentMenu>
-                    <a data-bs-toggle="collapse" [href]="'#' + childItem.uid" class="nav-link"
-                      [attr.aria-controls]="childItem.uid" role="button" aria-expanded="false" routerLinkActive="active">
+                    <!-- ✅ No routerLinkActive here either -->
+                    <a data-bs-toggle="collapse"
+                      [href]="'#' + childItem.uid"
+                      class="nav-link"
+                      [attr.aria-controls]="childItem.uid"
+                      role="button"
+                      [attr.aria-expanded]="isMenuItemActive(childItem)"
+                      [class.active]="isMenuItemActive(childItem)"
+                      (click)="$event.stopPropagation()">
                       <span class="sidenav-mini-icon">{{ childItem.name.charAt(0) }}</span>
                       <span class="sidenav-normal">{{ childItem.name }}</span>
                     </a>
 
-                    <div [id]="childItem.uid" class="collapse">
+                    <div [id]="childItem.uid" class="collapse" [class.show]="isMenuItemActive(childItem)">
                       <ul class="nav ms-4">
                         <li class="nav-item" *ngFor="let subChildItem of getChildItems(childItem)">
-                          <a class="nav-link" [routerLink]="subChildItem.url" routerLinkActive="active">
+                          <a class="nav-link"
+                            [routerLink]="subChildItem.url"
+                            routerLinkActive="active"
+                            (click)="$event.stopPropagation()">
                             <span class="sidenav-mini-icon">{{ subChildItem.name.charAt(0) }}</span>
                             <span class="sidenav-normal">{{ subChildItem.name }}</span>
                           </a>
@@ -68,4 +97,4 @@
       </ng-container>
     </ul>
   </div>
-</aside>
+</div>

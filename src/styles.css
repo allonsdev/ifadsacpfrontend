@@ -24,3 +24,8 @@
   margin-top: 2px; /* nudge icon to align with first line of text */
   flex-shrink: 0;
 }
+
+#sidenav-collapse-main {
+  max-height: 80vh;   /* adjust this value */
+  overflow-y: auto;
+}
