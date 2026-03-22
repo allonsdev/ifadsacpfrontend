@@ -90,6 +90,15 @@ import { TableModule } from 'primeng/table';
 import { ListboxModule } from 'primeng/listbox';
 import { AudittrailComponent } from './components/audittrail/audittrail.component';
 import { PersonalLibraryComponent } from './components/personal-library/personal-library.component';
+import { BeneficiaryduplicatesComponent } from './components/duplicates/beneficiaryduplicates/beneficiaryduplicates.component';
+import { MseInfosDuplicatesComponent } from './components/duplicates/mse-infos-duplicates/mse-infos-duplicates.component';
+import { EmploymentRecordsDuplicatesComponent } from './components/duplicates/employment-records-duplicates/employment-records-duplicates.component';
+import { WaterUsersDuplicatesComponent } from './components/duplicates/water-users-duplicates/water-users-duplicates.component';
+import { SchoolBusinessUnitsDuplicatesComponent } from './components/duplicates/school-business-units-duplicates/school-business-units-duplicates.component';
+import { RoadUsersDuplicatesComponent } from './components/duplicates/road-users-duplicates/road-users-duplicates.component';
+import { IrrigationSchemesDuplicatesComponent } from './components/duplicates/irrigation-schemes-duplicates/irrigation-schemes-duplicates.component';
+import { VbusDuplicatesComponent } from './components/duplicates/vbus-duplicates/vbus-duplicates.component';
+
 
 @NgModule({
   declarations: [
@@ -165,7 +174,15 @@ import { PersonalLibraryComponent } from './components/personal-library/personal
     Benupload,
     Mse,
     Vbu,
-    Matrix
+    Matrix,
+    BeneficiaryduplicatesComponent,
+    MseInfosDuplicatesComponent,
+    EmploymentRecordsDuplicatesComponent,
+    WaterUsersDuplicatesComponent,
+    SchoolBusinessUnitsDuplicatesComponent,
+    RoadUsersDuplicatesComponent,
+    IrrigationSchemesDuplicatesComponent,
+    VbusDuplicatesComponent,
   ],
   imports: [
     BrowserModule,
@@ -186,4 +203,4 @@ import { PersonalLibraryComponent } from './components/personal-library/personal
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule { }

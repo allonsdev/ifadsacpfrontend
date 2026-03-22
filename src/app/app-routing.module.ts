@@ -53,6 +53,14 @@ import { Benupload } from './components/benupload/benupload';
 import { Mse } from './components/mseupload/mse';
 import { Vbu } from './components/vbu/vbu';
 import { Matrix } from './components/matrix/matrix';
+import { BeneficiaryduplicatesComponent } from './components/duplicates/beneficiaryduplicates/beneficiaryduplicates.component';
+import { EmploymentRecordsDuplicatesComponent } from './components/duplicates/employment-records-duplicates/employment-records-duplicates.component';
+import { IrrigationSchemesDuplicatesComponent } from './components/duplicates/irrigation-schemes-duplicates/irrigation-schemes-duplicates.component';
+import { MseInfosDuplicatesComponent } from './components/duplicates/mse-infos-duplicates/mse-infos-duplicates.component';
+import { RoadUsersDuplicatesComponent } from './components/duplicates/road-users-duplicates/road-users-duplicates.component';
+import { SchoolBusinessUnitsDuplicatesComponent } from './components/duplicates/school-business-units-duplicates/school-business-units-duplicates.component';
+import { VbusDuplicatesComponent } from './components/duplicates/vbus-duplicates/vbus-duplicates.component';
+import { WaterUsersDuplicatesComponent } from './components/duplicates/water-users-duplicates/water-users-duplicates.component';
 
 const routes: Routes = [
   {
@@ -104,7 +112,11 @@ const routes: Routes = [
         component: Benupload,
         canActivate: [authGuard],
       },
-
+      {
+        path: 'beneficiaryduplicates',
+        component: BeneficiaryduplicatesComponent,
+        canActivate: [authGuard],
+      },
       {
         path: 'mseupload',
         component: Mse,
@@ -172,6 +184,14 @@ const routes: Routes = [
         component: AudittrailComponent,
         canActivate: [authGuard],
       },
+      { path: 'mse-infos-duplicates', component: MseInfosDuplicatesComponent, canActivate: [authGuard] },
+      { path: 'employment-records-duplicates', component: EmploymentRecordsDuplicatesComponent, canActivate: [authGuard] },
+      { path: 'water-users-duplicates', component: WaterUsersDuplicatesComponent, canActivate: [authGuard] },
+      { path: 'school-business-units-duplicates', component: SchoolBusinessUnitsDuplicatesComponent, canActivate: [authGuard] },
+      { path: 'road-users-duplicates', component: RoadUsersDuplicatesComponent, canActivate: [authGuard] },
+      { path: 'irrigation-schemes-duplicates', component: IrrigationSchemesDuplicatesComponent, canActivate: [authGuard] },
+      { path: 'vbus-duplicates', component: VbusDuplicatesComponent, canActivate: [authGuard] },
+
     ],
   },
   {
