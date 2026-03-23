@@ -66,6 +66,7 @@ import { WaterUsersComponent } from './components/wateruser/wateruser';
 import { RoadUsersComponent } from './components/roadusers/roaduser';
 import { SBUComponent } from './components/sbu/sbu';
 import { EmploymentComponent } from './components/employee/employee';
+import { IrrigationSchemesComponent } from './components/scheme/scheme';
 
 const routes: Routes = [
   {
@@ -113,6 +114,12 @@ const routes: Routes = [
 {
   path: 'employment',
   component: EmploymentComponent,
+  canActivate: [authGuard],
+},
+
+{
+  path: 'scheme',
+  component: IrrigationSchemesComponent,
   canActivate: [authGuard],
 },
       {

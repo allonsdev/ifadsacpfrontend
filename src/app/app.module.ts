@@ -104,6 +104,7 @@ import { RoadUsersComponent } from './components/roadusers/roaduser';
 import { SBUComponent } from './components/sbu/sbu';
 import { EmploymentComponent } from './components/employee/employee';
 
+import { IrrigationSchemesComponent } from './components/scheme/scheme';
 
 @NgModule({
   declarations: [
@@ -191,7 +192,8 @@ import { EmploymentComponent } from './components/employee/employee';
     WaterUsersComponent,
     RoadUsersComponent,
     SBUComponent,
-    EmploymentComponent
+    EmploymentComponent,
+    IrrigationSchemesComponent
   ],
   imports: [
     BrowserModule,

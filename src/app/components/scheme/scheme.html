@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <!-- Upload Section -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Upload Irrigation Schemes Excel File</h5>
+        </div>
+
+        <div class="row m-3">
+          <div class="col-12">
+            <label for="fileInput">Upload Excel File</label>
+            <input
+              type="file"
+              id="fileInput"
+              (change)="onFileChange($event)"
+              accept=".xlsx, .xls"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12">
+            <button
+              type="button"
+              class="btn bg-gradient-primary mb-3 mt-3"
+              (click)="sendSelectedData()"
+            >
+              Upload and Process
+            </button>
+          </div>
+        </div>
+
+        <!-- Failed Records Table -->
+        <div class="card-body mt-0" *ngIf="failedRecords.length > 0">
+          <h6 class="text-danger">Failed Records</h6>
+
+          <div class="table-responsive">
+            <table
+              class="table table-striped table-bordered table-sm row-border hover"
+              width="100%"
+              id="dtFailedRecords"
+            >
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Household ID</th>
+                  <th>Name</th>
+                  <th>Surname</th>
+                  <th>District</th>
+                  <th>Error Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let record of failedRecords; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ record.householdIdentifierNumber }}</td>
+                  <td>{{ record.name }}</td>
+                  <td>{{ record.surname }}</td>
+                  <td>{{ record.district }}</td>
+                  <td class="text-danger">{{ record.errorMessage }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- All Irrigation Records -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">All Irrigation Schemes Records</h5>
+        </div>
+
+        <div class="card-body mt-0">
+          <div class="table-responsive">
+            <table
+              class="table table-striped table-bordered table-sm row-border hover"
+              width="100%"
+              id="dtIrrigationSchemes"
+            >
+              <!-- DataTables will populate -->
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer pt-3"></footer>
+</div>
