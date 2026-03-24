@@ -909,6 +909,10 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       return;
     }
 
+    if (!this.isDateLimitsValid()) {
+      Swal.fire({ icon: 'error', title: 'Invalid Date Range', text: 'Start and End date should be within 2021 and 2030' });
+      return;
+    }
     if (!this.isDateRangeValid()) {
       Swal.fire({ icon: 'error', title: 'Invalid Date Range', text: 'End date cannot be before start date.' });
       return;
@@ -953,6 +957,16 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     const start = new Date(this.generalActivity.startDate);
     const end = new Date(this.generalActivity.endDate);
     return end >= start;
+  }
+
+  isDateLimitsValid(): boolean {
+    const start = new Date(this.generalActivity.startDate);
+    const end = new Date(this.generalActivity.endDate);
+
+    const isStartValid = start.getFullYear() >= 2021 && start.getFullYear() <= 2030
+    const isEndValid = end.getFullYear() >= 2021 && end.getFullYear() <= 2030
+
+    return isStartValid && isEndValid;
   }
 
   isGeneralActivityValid(): boolean {
