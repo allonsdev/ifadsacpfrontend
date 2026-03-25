@@ -8,7 +8,7 @@
   data-backdrop="static"
   data-keyboard="false"
 >
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header m-0">
         {{ ListName !== undefined ? ListName : "" }}
@@ -110,10 +110,10 @@
                         >
                           <thead>
                             <tr>
+                              <th>Actions</th>
                               <th *ngFor="let column of columns">
                                 {{ column }}
                               </th>
-                              <th>Actions</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -121,9 +121,6 @@
                               *ngFor="let item of filteredData"
                               [ngClass]="{ 'table-warning': item[parameter.PrimaryKey] === editingId }"
                             >
-                              <td *ngFor="let column of columns">
-                                {{ item[column] }}
-                              </td>
                               <td>
                                 <!-- Edit button -->
                                 <button
@@ -144,6 +141,9 @@
                                 >
                                   <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
+                              </td>
+                              <td *ngFor="let column of columns">
+                                {{ item[column] }}
                               </td>
                             </tr>
                           </tbody>

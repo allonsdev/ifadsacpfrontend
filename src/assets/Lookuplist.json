@@ -1,5 +1,12 @@
 [
   {
+    "ListName": "Activities",
+    "ListDescription": "List of Activities",
+    "SelectQuery": "SELECT [Id],[Name],[NameInShort] FROM [dbo].[Activities]",
+    "TableName": "Activities",
+    "PrimaryKey": "Id"
+  },
+  {
     "ListName": "Activity Statuses",
     "ListDescription": "List of Activity Statuses",
     "SelectQuery": "SELECT [Id],[Name] FROM [dbo].[luActivityStatuses]",
