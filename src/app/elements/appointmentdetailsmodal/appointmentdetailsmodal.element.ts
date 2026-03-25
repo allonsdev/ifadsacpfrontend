@@ -25,7 +25,7 @@ export class GeneralActivity {
   activityTypeId: number = 0;
   activityId: number = 0;
   activeStatusId: number = 0;
-  districtId: number = 0;
+  districtId: number | null = null;
   site: string = '';
   siteType: string = '';
   irrigationSchemeId: number = 0;
@@ -963,8 +963,10 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     const start = new Date(this.generalActivity.startDate);
     const end = new Date(this.generalActivity.endDate);
 
-    const isStartValid = start.getFullYear() >= 2021 && start.getFullYear() <= 2030
+    const isStartValid = (start.getFullYear() >= 2021 && start.getFullYear() <= 2030)
     const isEndValid = end.getFullYear() >= 2021 && end.getFullYear() <= 2030
+
+    console.log(isStartValid, isEndValid)
 
     return isStartValid && isEndValid;
   }
@@ -972,18 +974,6 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
   isGeneralActivityValid(): boolean {
     if (this.generalActivity.projectId !== 1) {
       this.generalActivity.projectId = 1;
-    }
-    if (this.generalActivity.startDate && this.generalActivity.endDate) {
-      const start = new Date(this.generalActivity.startDate);
-      const end = new Date(this.generalActivity.endDate);
-      if (end < start) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Invalid Date Range',
-          text: 'End date cannot be before start date.',
-        });
-        return false;
-      }
     }
     return (
       this.generalActivity.projectId !== 0 &&
@@ -1011,7 +1001,7 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
       activityTypeId: 0,
       activityId: 0,
       activeStatusId: 0,
-      districtId: 0,
+      districtId: null,
       site: '',
       siteType: '',
       irrigationSchemeId: 0,
@@ -1032,11 +1022,16 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
 
   updateGeneralActivity(): void {
     if (!this.isGeneralActivityValid()) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Validation Error',
-        text: 'Please fill in all required fields.',
-      });
+      Swal.fire({ icon: 'error', title: 'Validation Error', text: 'Please fill in all required fields.' });
+      return;
+    }
+
+    if (!this.isDateLimitsValid()) {
+      Swal.fire({ icon: 'error', title: 'Invalid Date Range', text: 'Start and End date should be within 2021 and 2030' });
+      return;
+    }
+    if (!this.isDateRangeValid()) {
+      Swal.fire({ icon: 'error', title: 'Invalid Date Range', text: 'End date cannot be before start date.' });
       return;
     }
 
