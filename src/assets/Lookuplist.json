@@ -2,8 +2,8 @@
   {
     "ListName": "Activities",
     "ListDescription": "List of Activities",
-    "SelectQuery": "SELECT [Id],[Name],[NameInShort] FROM [dbo].[Activities]",
-    "TableName": "Activities",
+    "SelectQuery": "SELECT [Id],[SubActivityId],[Description] FROM [dbo].[SubActivity]",
+    "TableName": "SubActivity",
     "PrimaryKey": "Id"
   },
   {
