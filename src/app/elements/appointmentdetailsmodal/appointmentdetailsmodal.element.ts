@@ -167,11 +167,10 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.resetUploadSection(); // add this
+    this.resetUploadSection();
     if (this.editid != 0) {
       this.getitem();
       this.getRegister();
-      this.loadActivities();
     }
   }
 
@@ -193,21 +192,16 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
   }
 
   loadActivities(): void {
-    console.log("hieeeeeee")
-    const selectedSubCompId = +this.generalActivity.subComponentId!;
-    console.log("Selected SubComponent:", selectedSubCompId);
+    // ✅ Guard: don't run if activities haven't been fetched yet
+    if (!this.activities || this.activities.length === 0) {
+      return;
+    }
 
-    // ✅ Filter activities that belong to the selected subcomponent
     this.filteredSubActivities = this.activities.filter(
-      (activity: any) => Number(activity.id) === this.generalActivity.activityId
+      (activity: any) => Number(activity.activityId) === Number(this.generalActivity.subComponentId)
     );
 
-    console.log("Selected filtered:", this.filteredSubActivities);
-
-    // ✅ Reset activity if current selection doesn't belong to this subcomponent
-    const currentActivityId = this.generalActivity.activityId;
-    console.log("Selected aCTIVITT:", currentActivityId);
-
+    console.log("Filtered sub-activities:", this.filteredSubActivities);
   }
 
   onSubComponentSelect(event: any) {
@@ -865,7 +859,6 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
   getitem() {
     this.http.get(`${this.apiUrl}/GeneralActivity/${this.editid}`).subscribe(
       (response: any) => {
-        // Convert dates to YYYY-MM-DD
         const formatToYMD = (dateStr: string) => {
           const date = new Date(dateStr);
           const year = date.getFullYear();
@@ -881,6 +874,9 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
         };
 
         console.log("Activity details:", this.generalActivity);
+
+        // ✅ Trigger filter AFTER generalActivity is populated
+        this.loadActivities();
       },
       (error) => {
         console.error('Error occurred:', error);
@@ -1129,7 +1125,10 @@ export class AppointmentdetailsmodalElement implements OnInit, OnChanges {
     this.http.get(`${this.apiUrl}/Mapping/subActivities`).subscribe(
       (response: any) => {
         this.activities = response;
-        console.log(this.activities)
+        console.log(this.activities);
+
+        // ✅ If getitem() already finished before this, populate filteredSubActivities now
+        this.loadActivities();
       },
       (error) => {
         console.error('Error occurred:', error);
