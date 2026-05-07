@@ -3,6 +3,7 @@ import {
   NO_ERRORS_SCHEMA,
   NgModule,
 } from '@angular/core';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -210,7 +211,9 @@ import { IrrigationSchemesComponent } from './components/scheme/scheme';
     TableModule,
     ListboxModule,
   ],
-  providers: [],
+  providers: [
+    provideCharts(withDefaultRegisterables()),
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
